@@ -1,0 +1,13 @@
+plugins {
+  id "com.moowork.node" version "1.3.1"
+}
+
+apply plugin: 'java-library'
+
+sourceSets {
+  main {
+    resources {
+      srcDir "$buildDir/generated-resources"
+    }
+  }
+}
