@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -28,11 +29,11 @@ public class Conference extends NamedEntity
     private LocalDateTime resultsDeadline;
 
     @ManyToMany(mappedBy = "conferences")
-    private Set<ProgramCommitteeMember> programCommitteeMembers;
+    private Set<ProgramCommitteeMember> programCommitteeMembers = new HashSet<>();
 
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Section> sections;
+    private Set<Section> sections = new HashSet<>();
 
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Submission> submissions;
+    private Set<Submission> submissions = new HashSet<>();
 }

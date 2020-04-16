@@ -27,7 +27,7 @@ public class User extends NamedEntity
     private ProgramCommitteeMember programCommitteeMember;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Submission> submissions;
+    private Set<Submission> submissions = new HashSet<>();
 
     @ManyToMany
     @JoinTable(

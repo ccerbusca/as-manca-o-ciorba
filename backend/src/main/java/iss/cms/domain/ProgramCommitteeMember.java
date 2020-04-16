@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -25,5 +26,5 @@ public class ProgramCommitteeMember extends BaseEntity
             joinColumns = { @JoinColumn(name="pc_id") },
             inverseJoinColumns = { @JoinColumn(name = "conference_id") }
     )
-    private Set<Conference> conferences;
+    private Set<Conference> conferences = new HashSet<>();
 }
