@@ -3,12 +3,14 @@ package iss.cms.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @NoArgsConstructor
 @MappedSuperclass
 @Data
-@Entity
 public abstract class BaseEntity
 {
     @Id

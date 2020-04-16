@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 
 @EqualsAndHashCode(callSuper = true)
@@ -13,7 +12,6 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @Data
 @MappedSuperclass
-@Entity
 public abstract class NamedEntity extends BaseEntity
 {
     private String name;
