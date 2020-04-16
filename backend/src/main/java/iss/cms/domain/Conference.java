@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 
+
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
