@@ -26,8 +26,8 @@ public class Proposal extends NamedEntity {
     @ElementCollection
     private Set<String> topics = new HashSet<>();
 
-    @OneToOne
-    @MapsId
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "submission_id", referencedColumnName = "id")
     private Submission submission;
 
     @ManyToMany

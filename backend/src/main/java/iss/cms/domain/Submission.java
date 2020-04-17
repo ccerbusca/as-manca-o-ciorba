@@ -15,11 +15,11 @@ import javax.persistence.*;
 public class Submission extends BaseEntity
 {
 
-    private String abstract_paper_url;
+    private String abstractPaperUrl;
 
-    private String full_paper_url;
+    private String fullPaperUrl;
 
-    @OneToOne(mappedBy = "submission", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "submission")
     private Proposal proposal;
 
     @ManyToOne

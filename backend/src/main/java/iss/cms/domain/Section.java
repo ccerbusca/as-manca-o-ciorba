@@ -18,21 +18,16 @@ import java.util.Set;
 public class Section extends NamedEntity
 {
 
-    private Date start_time;
+    private Date startTime;
 
-    private Date end_time;
+    private Date endTime;
 
-    private int expected_attendance;
+    private int expectedAttendance;
 
-    private String presentation_url;
+    private String presentationUrl;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ticket",
-            joinColumns = {@JoinColumn(name = "section_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    private Set<User> users = new HashSet<>(); //supervisors
+    @ManyToMany(mappedBy = "sections")
+    private Set<User> users = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="conference_id", nullable = false)
