@@ -31,9 +31,12 @@ public class User extends NamedEntity
 
     @ManyToMany
     @JoinTable(
-            name="ticket",
-            joinColumns = { @JoinColumn(name="user_id") },
-            inverseJoinColumns = { @JoinColumn(name="section_id") }
+            name = "ticket",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "section_id")}
     )
     private Set<Section> sections = new HashSet<>();
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Proposal> proposals = new HashSet<>();
 }
