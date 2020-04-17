@@ -20,6 +20,18 @@ public class ProgramCommitteeMember extends BaseEntity
     @MapsId
     private User user;
 
+    private String conferencePassword;
+
+    private String role;
+
+    private String personalWebpage;
+
+    @OneToMany(mappedBy = "pcMember", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany(mappedBy = "pcMember", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Bidding> biddings = new HashSet<>();
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="committee_membership",
