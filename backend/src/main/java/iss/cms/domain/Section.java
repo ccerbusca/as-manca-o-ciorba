@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -14,4 +19,10 @@ import javax.persistence.Entity;
 @Entity
 public class Section extends NamedEntity
 {
+    @ManyToMany(mappedBy = "sections")
+    private Set<User> users = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name="conference_id", nullable = false)
+    private Conference conference;
 }
