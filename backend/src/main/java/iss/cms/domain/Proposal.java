@@ -26,6 +26,10 @@ public class Proposal extends NamedEntity {
     @ElementCollection
     private Set<String> topics = new HashSet<>();
 
+    @OneToOne
+    @MapsId
+    private Submission submission;
+
     @ManyToMany
     @JoinTable(
             name = "authorship",

@@ -5,10 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,8 +17,22 @@ import java.util.Set;
 @Entity
 public class Section extends NamedEntity
 {
-    @ManyToMany(mappedBy = "sections")
-    private Set<User> users = new HashSet<>();
+
+    private Date start_time;
+
+    private Date end_time;
+
+    private int expected_attendance;
+
+    private String presentation_url;
+
+    @ManyToMany
+    @JoinTable(
+            name = "ticket",
+            joinColumns = {@JoinColumn(name = "section_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> users = new HashSet<>(); //supervisors
 
     @ManyToOne
     @JoinColumn(name="conference_id", nullable = false)
