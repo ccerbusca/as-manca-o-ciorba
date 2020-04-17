@@ -20,6 +20,10 @@ public class User extends NamedEntity
 {
     private String affiliation;
 
+    private String username;
+
+    private String password;
+
     @Email
     private String email;
 
