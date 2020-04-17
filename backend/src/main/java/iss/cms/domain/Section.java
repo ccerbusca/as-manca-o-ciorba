@@ -5,10 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +17,15 @@ import java.util.Set;
 @Entity
 public class Section extends NamedEntity
 {
+
+    private Date startTime;
+
+    private Date endTime;
+
+    private int expectedAttendance;
+
+    private String presentationUrl;
+
     @ManyToMany(mappedBy = "sections")
     private Set<User> users = new HashSet<>();
 
