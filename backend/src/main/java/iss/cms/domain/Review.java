@@ -14,9 +14,19 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Data
 @Entity
-public class Review extends BaseEntity
-{
+public class Review extends BaseEntity {
+
+    private ReviewResult result;
     @ManyToOne
-    @JoinColumn(name="pc_id", nullable = false)
+    @JoinColumn(name = "proposal_id", nullable = false)
+    private Proposal proposal;
+
+    @ManyToOne
+    @JoinColumn(name = "pc_id", nullable = false)
     private ProgramCommitteeMember pcMember;
+
+    enum ReviewResult {
+        STRONG_ACCEPT, ACCEPT, WEAK_ACCEPT, BORDERLINE_PAPER,
+        WEAK_REJECT, REJECT, STRONG_REJECT
+    }
 }

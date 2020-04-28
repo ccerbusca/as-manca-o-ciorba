@@ -14,11 +14,18 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Data
 @Entity
-public class Bidding extends BaseEntity
-{
+public class Bidding extends BaseEntity {
+
+    private BidResult result;
+    @ManyToOne
+    @JoinColumn(name = "proposal_id", nullable = false)
+    private Proposal proposal;
 
     @ManyToOne
-    @JoinColumn(name="pc_id", nullable = false)
+    @JoinColumn(name = "pc_id", nullable = false)
     private ProgramCommitteeMember pcMember;
 
+    enum BidResult {
+        PLEASED, NEUTRAL, REFUSED
+    }
 }
