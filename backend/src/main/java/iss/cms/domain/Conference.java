@@ -19,13 +19,18 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-public class Conference extends NamedEntity
-{
+public class Conference extends NamedEntity {
+
     private LocalDateTime startTime;
+
     private LocalDateTime endTime;
+
     private LocalDateTime proposalDeadline;
+
     private LocalDateTime assignmentDeadline;
+
     private LocalDateTime evaluationDeadline;
+
     private LocalDateTime resultsDeadline;
 
     @ManyToMany(mappedBy = "conferences")

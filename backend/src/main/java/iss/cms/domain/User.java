@@ -15,9 +15,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="cms_user")
-public class User extends NamedEntity
-{
+@Table(name = "cms_user")
+public class User extends NamedEntity {
+
     private String affiliation;
 
     private String username;

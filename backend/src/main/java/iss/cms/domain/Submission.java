@@ -5,15 +5,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
 @Data
 @Entity
-public class Submission extends BaseEntity
-{
+public class Submission extends BaseEntity {
 
     private String abstractPaperUrl;
 
@@ -23,10 +25,10 @@ public class Submission extends BaseEntity
     private Proposal proposal;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="conference_id", nullable = false)
+    @JoinColumn(name = "conference_id", nullable = false)
     private Conference conference;
 }
