@@ -22,7 +22,7 @@ public class Bidding extends BaseEntity {
     private Proposal proposal;
 
     @ManyToOne
-    @JoinColumn(name = "pc_id", nullable = false)
+    @JoinColumn(name="pc_id", nullable = false)
     private ProgramCommitteeMember pcMember;
 
 }
