@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +16,7 @@ import java.util.Set;
 @Data
 @Entity
 public class Proposal extends NamedEntity {
+
     private String name;
     private LocalDateTime uploadTime;
 
@@ -29,6 +29,12 @@ public class Proposal extends NamedEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "submission_id", referencedColumnName = "id")
     private Submission submission;
+
+    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Bidding> biddings = new HashSet<>();
+
+    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Review> reviews = new HashSet<>();
 
     @ManyToMany
     @JoinTable(

@@ -14,8 +14,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-public class ProgramCommitteeMember extends BaseEntity
-{
+public class ProgramCommitteeMember extends BaseEntity {
+
     @OneToOne
     @MapsId
     private User user;
@@ -34,9 +34,9 @@ public class ProgramCommitteeMember extends BaseEntity
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name="committee_membership",
-            joinColumns = { @JoinColumn(name="pc_id") },
-            inverseJoinColumns = { @JoinColumn(name = "conference_id") }
+            name = "committee_membership",
+            joinColumns = {@JoinColumn(name = "pc_id")},
+            inverseJoinColumns = {@JoinColumn(name = "conference_id")}
     )
     private Set<Conference> conferences = new HashSet<>();
 }

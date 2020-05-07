@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @Data
 @MappedSuperclass
-public abstract class NamedEntity extends BaseEntity
-{
+public abstract class NamedEntity extends BaseEntity {
+
     private String name;
 }
