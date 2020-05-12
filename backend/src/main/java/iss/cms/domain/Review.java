@@ -14,6 +14,8 @@ import javax.persistence.*;
 @Entity
 public class Review extends BaseEntity {
 
+    private String recommendation;
+
     @Enumerated(EnumType.STRING)
     private ReviewResult result;
 
