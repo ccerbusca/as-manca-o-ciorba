@@ -22,7 +22,8 @@ public class ProgramCommitteeMember extends BaseEntity {
 
     private String conferencePassword;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     private String personalWebpage;
 
