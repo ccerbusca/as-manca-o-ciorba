@@ -33,6 +33,8 @@ public class Conference extends NamedEntity {
 
     private LocalDateTime resultsDeadline;
 
+    private String conferencePassword;
+
     @ManyToMany(mappedBy = "conferences")
     private Set<ProgramCommitteeMember> programCommitteeMembers = new HashSet<>();
 

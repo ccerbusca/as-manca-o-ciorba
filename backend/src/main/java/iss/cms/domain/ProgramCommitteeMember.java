@@ -16,16 +16,14 @@ import java.util.Set;
 @Entity
 public class ProgramCommitteeMember extends BaseEntity {
 
-    @OneToOne
-    @MapsId
-    private User user;
-
-    private String conferencePassword;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
     private String personalWebpage;
+
+    @OneToOne
+    @MapsId
+    private User user;
 
     @OneToMany(mappedBy = "pcMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<>();
@@ -40,4 +38,7 @@ public class ProgramCommitteeMember extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "conference_id")}
     )
     private Set<Conference> conferences = new HashSet<>();
+
+    @OneToOne(mappedBy = "sectionChair")
+    private Section section;
 }
