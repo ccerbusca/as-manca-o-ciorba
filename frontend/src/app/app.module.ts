@@ -5,10 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularMaterialModule} from './angular-material.module';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import { UserComponent } from './user/user.component';
-import {UserService} from "./user/shared/user.service";
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UserComponent} from './user/user.component';
+import {UserService} from './user/shared/user.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import {UserService} from "./user/shared/user.service";
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [UserService],

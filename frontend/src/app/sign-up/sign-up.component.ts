@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, Validators,NgForm} from "@angular/forms";
-import {ErrorStateMatcher} from "@angular/material/core";
-import {Router} from "@angular/router";
-import {UserService} from "../user/shared/user.service";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {Router} from '@angular/router';
+import {UserService} from '../user/shared/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,11 +18,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SignUpComponent implements OnInit {
 
-  emailFormControl= new FormControl('',[
-    Validators.required,Validators.email,
+  emailFormControl = new FormControl('',[
+    Validators.required, Validators.email,
   ]);
 
-  matcher= new MyErrorStateMatcher();
+  matcher = new MyErrorStateMatcher();
 
 
   constructor(private router: Router, private userService: UserService) { }
@@ -32,7 +32,7 @@ export class SignUpComponent implements OnInit {
 
 
   signUp(username: string, email: string, password: string, affiliation: string) {
-    this.userService.save({username,email,password,affiliation}).subscribe(user => console.log("saved user",user));
+    this.userService.save({username, email, password, affiliation}).subscribe(user => console.log('saved user', user));
   }
 
   goToLogin(): void {
