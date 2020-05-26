@@ -9,12 +9,14 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserComponent} from './user/user.component';
 import {UserService} from './user/shared/user.service';
+import { SignUpDialogComponent } from './sign-up/sign-up-dialog/sign-up-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
-    UserComponent
+    UserComponent,
+    SignUpDialogComponent
   ],
   imports: [
     BrowserModule,
