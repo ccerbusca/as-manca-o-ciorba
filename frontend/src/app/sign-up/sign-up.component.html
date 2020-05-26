@@ -1,0 +1,45 @@
+<h2>Sign Up</h2>
+
+<form class="signup-form ml-3" [formGroup]="signUpForm" >
+
+  <p>
+    <mat-form-field class="full-width ">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="exampleuser123" formControlName="username"/>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width">
+      <mat-label>Affiliation</mat-label>
+      <input matInput placeholder="Example SRL" formControlName="affiliation"/>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com" formControlName="email"/>
+      <mat-error *ngIf="signUpForm.hasError('email') && !signUpForm.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="signUpForm.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </p>
+
+
+  <p>
+    <mat-form-field class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="*****" formControlName="password"/>
+    </mat-form-field>
+  </p>
+
+  <button mat-raised-button (click)="signUp()" [disabled]="signUpForm.invalid">Sign Up</button>
+
+</form>
+
+<p class="ml-3">Already have an account? <a mat-button (click)="goToLogin()">Log-In here</a></p>
