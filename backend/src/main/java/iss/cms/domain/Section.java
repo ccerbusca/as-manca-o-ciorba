@@ -33,6 +33,6 @@ public class Section extends NamedEntity {
     private Conference conference;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "schair_id", referencedColumnName = "id")
+    @JoinColumn(name = "schair_id", referencedColumnName = "user_id")
     private ProgramCommitteeMember sectionChair;
 }
