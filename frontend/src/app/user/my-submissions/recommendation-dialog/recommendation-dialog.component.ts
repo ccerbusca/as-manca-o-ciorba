@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 export interface DialogData {
   text: string;
@@ -19,7 +19,7 @@ export class RecommendationDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close();
   }
 }
