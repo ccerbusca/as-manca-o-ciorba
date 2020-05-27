@@ -8,13 +8,17 @@ import {AngularMaterialModule} from './angular-material.module';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserComponent} from './user/user.component';
-import {UserService} from './user/shared/user.service';
 import {SignUpDialogComponent} from './sign-up/sign-up-dialog/sign-up-dialog.component';
 import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
-import {SubmissionService} from "./user/shared/submission.service";
+import {SubmissionService} from './user/shared/submission.service';
 import {RecommendationDialogComponent} from './user/my-submissions/recommendation-dialog/recommendation-dialog.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatSortModule} from "@angular/material/sort";
+import {LogInComponent} from './log-in/log-in.component';
+import {HttpClientModule} from '@angular/common/http';
+import {ConfigLoadingService} from './shared/config-loading-service';
+import {AuthService} from './shared/auth/auth.service';
+import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
+import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +26,7 @@ import {MatSortModule} from "@angular/material/sort";
     SignUpComponent,
     UserComponent,
     SignUpDialogComponent,
+    LogInComponent,
     MySubmissionsComponent,
     RecommendationDialogComponent
   ],
@@ -32,10 +37,9 @@ import {MatSortModule} from "@angular/material/sort";
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatSortModule,
+    HttpClientModule
   ],
-  providers: [UserService, SubmissionService],
+  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
