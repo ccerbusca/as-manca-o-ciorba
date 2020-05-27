@@ -12,7 +12,9 @@ import {UserService} from './user/shared/user.service';
 import {SignUpDialogComponent} from './sign-up/sign-up-dialog/sign-up-dialog.component';
 import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
 import {SubmissionService} from "./user/shared/submission.service";
-import {RecommendationDialogComponent} from './recommendation-dialog/recommendation-dialog.component';
+import {RecommendationDialogComponent} from './user/my-submissions/recommendation-dialog/recommendation-dialog.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {RecommendationDialogComponent} from './recommendation-dialog/recommendat
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [UserService, SubmissionService],
   bootstrap: [AppComponent]

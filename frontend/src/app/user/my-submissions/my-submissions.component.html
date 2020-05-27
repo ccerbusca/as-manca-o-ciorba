@@ -1,23 +1,23 @@
-<p>my-submissions works!</p>
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortDisableClear>
-  <ng-container matColumnDef="Title">
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="title" matSortDirection="asc"
+           matSortDisableClear>
+  <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
     <mat-cell *matCellDef="let submission">{{submission.title}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="Status">
+  <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
     <mat-cell *matCellDef="let submission">{{submission.status}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="Abstract URL">
-    <mat-header-cell *matHeaderCellDef>Abstract URL</mat-header-cell>
+  <ng-container matColumnDef="abstractPaperUrl">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Abstract URL</mat-header-cell>
     <mat-cell *matCellDef="let submission">{{submission.abstractPaperUrl}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="Full URL">
-    <mat-header-cell *matHeaderCellDef>Full URL</mat-header-cell>
+  <ng-container matColumnDef="fullPaperUrl">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Full URL</mat-header-cell>
     <mat-cell *matCellDef="let submission">{{submission.fullPaperUrl}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="Recommendation">
-    <mat-header-cell *matHeaderCellDef>Recommendation</mat-header-cell>
+  <ng-container matColumnDef="recommendation">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Recommendation</mat-header-cell>
 
     <mat-cell *matCellDef="let submission">
       <div *ngIf="submission.status === 'accepted'; then thenBlock else elseBlock"></div>
@@ -26,6 +26,7 @@
       </ng-template>
       <ng-template #elseBlock>-</ng-template>
     </mat-cell>
+
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
   <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>

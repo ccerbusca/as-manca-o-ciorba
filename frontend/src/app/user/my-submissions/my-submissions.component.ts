@@ -16,7 +16,7 @@ export class MySubmissionsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   submissions: Submission[];
   dataSource;
-  displayedColumns = ['title', 'status', 'abstractPaperUrl', 'fullPaperUrl'];
+  displayedColumns = ['title', 'status', 'abstractPaperUrl', 'fullPaperUrl', 'recommendation'];
 
   constructor(private submissionService: SubmissionService,
               private dialog: MatDialog) {
@@ -26,7 +26,7 @@ export class MySubmissionsComponent implements OnInit {
     this.submissionService.getSubmissions()
       .subscribe(submissions => {
         this.submissions = submissions
-        this.dataSource = new MatTableDataSource(submissions);
+        this.dataSource = new MatTableDataSource(this.submissions);
         this.dataSource.sort = this.sort;
         console.log(this.submissions)
       })
