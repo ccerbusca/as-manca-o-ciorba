@@ -1,23 +1,30 @@
-<h2>Sign Up</h2>
+<h1 class="ml-3 pt-2">Sign Up</h1>
 
 <form class="signup-form ml-3" [formGroup]="signUpForm" >
 
   <p>
-    <mat-form-field class="full-width ">
+    <mat-form-field class="input-field">
       <mat-label>Username</mat-label>
       <input matInput placeholder="exampleuser123" formControlName="username"/>
     </mat-form-field>
   </p>
 
   <p>
-    <mat-form-field class="full-width">
+    <mat-form-field class="input-field">
+      <mat-label>Full Name</mat-label>
+      <input matInput placeholder="Ion Creanga" formControlName="name"/>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="input-field">
       <mat-label>Affiliation</mat-label>
       <input matInput placeholder="Example SRL" formControlName="affiliation"/>
     </mat-form-field>
   </p>
 
   <p>
-    <mat-form-field class="full-width">
+    <mat-form-field class="input-field">
       <mat-label>Email</mat-label>
       <input matInput [errorStateMatcher]="matcher"
              placeholder="Ex. pat@example.com" formControlName="email"/>
@@ -32,13 +39,13 @@
 
 
   <p>
-    <mat-form-field class="full-width">
+    <mat-form-field class="input-field">
       <mat-label>Password</mat-label>
       <input matInput type="password" placeholder="*****" formControlName="password"/>
     </mat-form-field>
   </p>
 
-  <button mat-raised-button (click)="signUp()" [disabled]="signUpForm.invalid">Sign Up</button>
+  <button mat-raised-button color="primary" (click)="signUp()" [disabled]="signUpForm.invalid">Sign Up</button>
 
 </form>
 

@@ -8,15 +8,21 @@ import {AngularMaterialModule} from './angular-material.module';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserComponent} from './user/user.component';
-import {UserService} from './user/shared/user.service';
-import { SignUpDialogComponent } from './sign-up/sign-up-dialog/sign-up-dialog.component';
+import {SignUpDialogComponent} from './sign-up/sign-up-dialog/sign-up-dialog.component';
+import {LogInComponent} from './log-in/log-in.component';
+import {ConfigLoadingService} from './shared/config-loading-service';
+import {AuthService} from './shared/auth/auth.service';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
+import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     UserComponent,
-    SignUpDialogComponent
+    SignUpDialogComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +30,10 @@ import { SignUpDialogComponent } from './sign-up/sign-up-dialog/sign-up-dialog.c
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [UserService],
+  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

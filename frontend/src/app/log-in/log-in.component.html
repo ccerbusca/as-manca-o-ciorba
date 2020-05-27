@@ -1,0 +1,24 @@
+<h1 class="ml-3 pt-2">Log In</h1>
+<form [formGroup]="loginForm" class="ml-3 mt-2">
+
+  <p>
+    <mat-form-field class="input-field">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="exampleuser123" formControlName="username"/>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="input-field">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="*****" formControlName="password"/>
+    </mat-form-field>
+    <mat-error *ngIf="errorMessage">
+      Wrong username or password
+    </mat-error>
+  </p>
+
+  <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Log In</button>
+
+</form>
+<p class="ml-3">Don't have an account? <a mat-button (click)="registerRedirect()">Register here</a></p>
