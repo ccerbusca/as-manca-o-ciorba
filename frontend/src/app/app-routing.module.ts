@@ -5,7 +5,7 @@ import {LogInComponent} from './log-in/log-in.component';
 import {AppComponent} from './app.component';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
-import {AuthGuardService} from "./shared/auth/guards/auth-guard.service";
+import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 
 
 const routes: Routes = [
