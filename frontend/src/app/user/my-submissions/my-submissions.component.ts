@@ -13,10 +13,10 @@ import {RecommendationDialogComponent} from "./recommendation-dialog/recommendat
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MySubmissionsComponent implements OnInit {
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   submissions: Submission[];
   dataSource;
-  displayedColumns = ['title', 'status', 'abstractPaperUrl', 'fullPaperUrl', 'recommendation'];
+  displayedColumns: String[] = ['title', 'status', 'abstractPaperUrl', 'fullPaperUrl', 'recommendation'];
 
   constructor(private submissionService: SubmissionService,
               private dialog: MatDialog) {
