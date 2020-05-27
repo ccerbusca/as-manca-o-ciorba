@@ -9,12 +9,16 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserComponent} from './user/user.component';
 import {SignUpDialogComponent} from './sign-up/sign-up-dialog/sign-up-dialog.component';
+import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
+import {SubmissionService} from './user/shared/submission.service';
+import {RecommendationDialogComponent} from './user/my-submissions/recommendation-dialog/recommendation-dialog.component';
 import {LogInComponent} from './log-in/log-in.component';
+import {HttpClientModule} from '@angular/common/http';
 import {ConfigLoadingService} from './shared/config-loading-service';
 import {AuthService} from './shared/auth/auth.service';
-import {HttpClientModule} from '@angular/common/http';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-gua
     SignUpComponent,
     UserComponent,
     SignUpDialogComponent,
-    LogInComponent
+    LogInComponent,
+    MySubmissionsComponent,
+    RecommendationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,7 @@ import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-gua
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService],
+  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
