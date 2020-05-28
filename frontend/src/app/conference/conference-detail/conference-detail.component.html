@@ -1,0 +1,27 @@
+<h2 class="ml-3">{{conference.name}}</h2>
+<div class="ml-3">
+  <button mat-raised-button color="primary"  (click)="interested()" [disabled]="possibleToAttend">Interested</button>
+</div>
+
+<mat-tab-group mat-align-tabs="start" style="height: 600px">
+  <mat-tab label="General Info"><p class="ml-3"> {{conference.generalInfo}}</p></mat-tab>
+  <mat-tab label="Program Committee Members">
+    <mat-list>
+      <mat-list-item *ngFor="let pcMember of conference.pcMembers" class="ml-3" style="width: 600px">
+        <mat-icon mat-list-icon>face</mat-icon>
+        {{pcMember.user.name}}
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+  <mat-tab label="Application Details">
+    <div class="ml-3">
+      <p>Conference will begin on {{conference.startTime | date: 'shortDate'}} and end on {{conference.endTime | date: 'shortDate'}}</p>
+      <p>The deadline for sending proposals is: {{conference.proposalDeadline | date: 'shortDate'}}</p>
+      <p>The deadline for assigning reviewers is: {{conference.assignmentDeadline | date: 'shortDate'}}</p>
+      <p>The deadline for proposals evaluation is: {{conference.evaluationDeadline | date: 'shortDate'}}</p>
+      <p>The deadline for results of the evaluation is: {{conference.resultsDeadline | date: 'shortDate'}}</p>
+      <button mat-raised-button color="primary" (click)="apply()" [disabled]="possibleToSubmit">Apply</button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
