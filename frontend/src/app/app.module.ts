@@ -19,6 +19,7 @@ import {AuthService} from './shared/auth/auth.service';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
+import {ConferenceService} from './user/shared/conference.service';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import {MyConferencesComponent} from './user/my-conferences/my-conferences.compo
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService],
+  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService, ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

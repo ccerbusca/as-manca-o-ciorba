@@ -34,7 +34,7 @@ export class MySubmissionsComponent implements OnInit {
 
   openDialog(submission: Submission): void {
     this.dialog.open(RecommendationDialogComponent,
-      {width: '250px', data: {text: submission.recommendation}})
+      {width: '500px', data: {text: submission.recommendation}})
       .afterClosed().subscribe(_ =>
       console.log('dialog closed'));
   }
