@@ -3,7 +3,7 @@
   <h1>My Conferences</h1>
   <br><br><br><br>
   <mat-accordion *ngFor="let conference of conferences">
-    <mat-expansion-panel style="width: 80%">
+    <mat-expansion-panel style="width: 50%">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{conference.title}}
@@ -31,7 +31,7 @@
 
         <div *ngIf="user.biddings.length > 0; then biddingsPendingBlock"></div>
         <ng-template #biddingsPendingBlock>
-          <button color="warn" mat-raised-buttonstyle="margin-left: 10px">
+          <button color="warn" mat-raised-button style="margin-left: 10px">
             Bid
           </button>
         </ng-template>
@@ -44,5 +44,6 @@
         </ng-template>
       </div>
     </mat-expansion-panel>
+    <br>
   </mat-accordion>
 </div>
