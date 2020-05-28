@@ -6,13 +6,15 @@ import {AppComponent} from './app.component';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
+import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 
 
 const routes: Routes = [
   {path: '', component: AppComponent, pathMatch: 'full'},
   {path: 'signup', component: SignUpComponent, canActivate: [AlreadyLoggedGuardService]},
   {path: 'login', component: LogInComponent, canActivate: [AlreadyLoggedGuardService]},
-  {path: 'my-submissions', component: MySubmissionsComponent, canActivate: [AuthGuardService]}
+  {path: 'my-submissions', component: MySubmissionsComponent, canActivate: [AuthGuardService]},
+  {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
