@@ -18,6 +18,8 @@ import {ConfigLoadingService} from './shared/config-loading-service';
 import {AuthService} from './shared/auth/auth.service';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
+import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
+import {ConferenceService} from './user/shared/conference.service';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-gua
     SignUpDialogComponent,
     LogInComponent,
     MySubmissionsComponent,
-    RecommendationDialogComponent
+    RecommendationDialogComponent,
+    MyConferencesComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,7 @@ import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-gua
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService],
+  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService, ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

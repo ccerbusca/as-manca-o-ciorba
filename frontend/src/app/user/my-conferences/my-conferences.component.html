@@ -1,0 +1,49 @@
+<div align="center">
+  <br><br><br><br>
+  <h1>My Conferences</h1>
+  <br><br><br><br>
+  <mat-accordion *ngFor="let conference of conferences">
+    <mat-expansion-panel style="width: 50%">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{conference.title}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <!--TODO change condition, it's like this just for mockup purposes -->
+          <div *ngIf="getRandom() % 2 === 0; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <strong> Reviews to be done! </strong>
+          </ng-template>
+          <ng-template #elseBlock>
+            <strong> Biddings pending! </strong>
+          </ng-template>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div style="float: right">
+        <div *ngIf="user.role !== Role.MEMBER; then elevatedBlock"></div>
+        <ng-template #elevatedBlock>
+          <!-- TODO if conference.proposalDeadline < Date -->
+          <div *ngIf="getRandom() % 2 === 0; then biddingDoneBlock"></div>
+          <ng-template #biddingDoneBlock>
+            <button mat-raised-button>Edit/Assign reviewers</button>
+          </ng-template>
+        </ng-template>
+
+        <div *ngIf="user.biddings.length > 0; then biddingsPendingBlock"></div>
+        <ng-template #biddingsPendingBlock>
+          <button color="warn" mat-raised-button style="margin-left: 10px">
+            Bid
+          </button>
+        </ng-template>
+
+        <div *ngIf="user.reviews.length > 0; then reviewsPendingBlock"></div>
+        <ng-template #reviewsPendingBlock>
+          <button color="warn" mat-raised-button style="margin-left: 10px">
+            Review
+          </button>
+        </ng-template>
+      </div>
+    </mat-expansion-panel>
+    <br>
+  </mat-accordion>
+</div>
