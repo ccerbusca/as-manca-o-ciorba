@@ -1,6 +1,7 @@
 import {PcMember} from '../../user/pc-member/shared/pcMember.model';
 
 export class Conference {
+  id: number;
   name: string;
   startTime: Date;
   endTime: Date;

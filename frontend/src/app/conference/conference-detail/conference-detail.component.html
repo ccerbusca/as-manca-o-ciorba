@@ -1,6 +1,12 @@
 <h2 class="ml-3">{{conference.name}}</h2>
 <div class="ml-3">
-  <button mat-raised-button color="primary"  (click)="interested()" [disabled]="possibleToAttend">Interested</button>
+    <ng-template #elseB>
+      <button mat-raised-button color="primary"  (click)="interested()">Interested</button>
+    </ng-template>
+    <ng-template #thenB>
+      <p>This meeting already took place</p>
+    </ng-template>
+  <div *ngIf="possibleToAttend; then thenB else elseB"></div>
 </div>
 
 <mat-tab-group mat-align-tabs="start" style="height: 600px">
@@ -15,12 +21,20 @@
   </mat-tab>
   <mat-tab label="Application Details">
     <div class="ml-3">
-      <p>Conference will begin on {{conference.startTime | date: 'shortDate'}} and end on {{conference.endTime | date: 'shortDate'}}</p>
-      <p>The deadline for sending proposals is: {{conference.proposalDeadline | date: 'shortDate'}}</p>
-      <p>The deadline for assigning reviewers is: {{conference.assignmentDeadline | date: 'shortDate'}}</p>
-      <p>The deadline for proposals evaluation is: {{conference.evaluationDeadline | date: 'shortDate'}}</p>
-      <p>The deadline for results of the evaluation is: {{conference.resultsDeadline | date: 'shortDate'}}</p>
-      <button mat-raised-button color="primary" (click)="apply()" [disabled]="possibleToSubmit">Apply</button>
+      <p>Conference will begin on <b>{{conference.startTime | date: 'shortDate'}}</b> and end on <b>{{conference.endTime | date: 'shortDate'}}</b></p>
+      <p>The deadline for sending proposals is: <b>{{conference.proposalDeadline | date: 'shortDate'}}</b></p>
+      <p>The deadline for assigning reviewers is: <b>{{conference.assignmentDeadline | date: 'shortDate'}}</b></p>
+      <p>The deadline for proposals evaluation is: <b>{{conference.evaluationDeadline | date: 'shortDate'}}</b></p>
+      <p>The deadline for results of the evaluation is: <b>{{conference.resultsDeadline | date: 'shortDate'}}</b></p>
+      <div>
+        <ng-template #thenBlock>
+          <p style="color: red">The deadline for paper submission has passed!</p>
+        </ng-template>
+        <ng-template #elseBlock>
+          <button mat-raised-button color="primary" (click)="apply()" [disabled]="possibleToSubmit">Apply</button>
+        </ng-template>
+        <div *ngIf="possibleToSubmit; then thenBlock else elseBlock"></div>
+      </div>
     </div>
   </mat-tab>
 </mat-tab-group>

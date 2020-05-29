@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'login', component: LogInComponent, canActivate: [AlreadyLoggedGuardService]},
   {path: 'my-submissions', component: MySubmissionsComponent, canActivate: [AuthGuardService]},
   {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]},
-  {path: 'conferences/:name', component: ConferenceDetailComponent},
+  {path: 'conference/:id', component: ConferenceDetailComponent},
 ];
 
 @NgModule({

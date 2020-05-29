@@ -11,6 +11,7 @@ import {MEMBERS} from "../../user/pc-member/shared/mock-members";
 export class ConferenceDetailComponent implements OnInit {
 
   conference: Conference = {
+    id: 1,
     name: 'Basketball',
     password: 'abcd',
     startTime: new Date(2020, 8 , 10),
@@ -22,8 +23,6 @@ export class ConferenceDetailComponent implements OnInit {
     generalInfo: 'ashfhabsjncjasdnj jjasdokfjkoa qwer \n adfjasdfiasgf',
     pcMembers: MEMBERS
   };
-  possibleToSubmit = this.conference.proposalDeadline < new Date();
-  possibleToAttend = this.conference.startTime < new Date();
   constructor() { }
 
   ngOnInit(): void {
@@ -31,8 +30,14 @@ export class ConferenceDetailComponent implements OnInit {
   apply(): void {
     return;
   }
+  get possibleToSubmit(): boolean {
+    return this.conference.proposalDeadline < new Date();
+  }
+  get possibleToAttend(): boolean {
+    return this.conference.startTime < new Date();
+  }
 
-  interested() {
-    return
+  interested(): void {
+    return;
   }
 }
