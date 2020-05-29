@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Conference} from '../shared/conference.model';
-import {PcMember} from "../../user/pc-member/shared/pcMember.model";
-import {MEMBERS} from "../../user/pc-member/shared/mock-members";
+import {Component, Input, OnInit} from '@angular/core';
+import {Conference} from '../../user/shared/conference.model';
+import {ConferenceService} from '../../user/shared/conference.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-conference-detail',
@@ -10,22 +10,11 @@ import {MEMBERS} from "../../user/pc-member/shared/mock-members";
 })
 export class ConferenceDetailComponent implements OnInit {
 
-  conference: Conference = {
-    id: 1,
-    name: 'Basketball',
-    password: 'abcd',
-    startTime: new Date(2020, 8 , 10),
-    endTime: new Date(2020, 8, 11),
-    proposalDeadline: new Date(2020, 6, 21),
-    assignmentDeadline: new Date(2020, 6, 27),
-    evaluationDeadline: new Date(2020, 7, 3),
-    resultsDeadline: new Date(2020, 7, 10),
-    generalInfo: 'ashfhabsjncjasdnj jjasdokfjkoa qwer \n adfjasdfiasgf',
-    pcMembers: MEMBERS
-  };
-  constructor() { }
+  @Input() conference: Conference;
+  constructor(private conferenceService: ConferenceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getConference();
   }
   apply(): void {
     return;
@@ -39,5 +28,10 @@ export class ConferenceDetailComponent implements OnInit {
 
   interested(): void {
     return;
+  }
+
+  private getConference(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.conferenceService.getConference(id).subscribe(conference => this.conference = conference);
   }
 }

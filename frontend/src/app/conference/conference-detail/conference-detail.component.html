@@ -1,4 +1,4 @@
-<h2 class="ml-3">{{conference.name}}</h2>
+<h2 class="ml-3">{{conference.title}}</h2>
 <div class="ml-3">
     <ng-template #elseB>
       <button mat-raised-button color="primary"  (click)="interested()">Interested</button>
@@ -31,7 +31,7 @@
           <p style="color: red">The deadline for paper submission has passed!</p>
         </ng-template>
         <ng-template #elseBlock>
-          <button mat-raised-button color="primary" (click)="apply()" [disabled]="possibleToSubmit">Apply</button>
+          <button mat-raised-button color="primary" (click)="apply()">Apply</button>
         </ng-template>
         <div *ngIf="possibleToSubmit; then thenBlock else elseBlock"></div>
       </div>
