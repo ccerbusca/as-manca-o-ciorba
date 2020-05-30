@@ -35,6 +35,8 @@ public class Conference extends NamedEntity {
 
     private String conferencePassword;
 
+    private String generalInfo;
+
     @ManyToMany(mappedBy = "conferences")
     private Set<ProgramCommitteeMember> programCommitteeMembers = new HashSet<>();
 
