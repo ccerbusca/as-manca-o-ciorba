@@ -20,7 +20,6 @@ import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 import {ConferenceService} from './user/shared/conference.service';
-import { ConferenceDetailComponent } from './conference/conference-detail/conference-detail.component';
 
 
 @NgModule({
@@ -32,8 +31,7 @@ import { ConferenceDetailComponent } from './conference/conference-detail/confer
     LogInComponent,
     MySubmissionsComponent,
     RecommendationDialogComponent,
-    MyConferencesComponent,
-    ConferenceDetailComponent,
+    MyConferencesComponent
   ],
   imports: [
     BrowserModule,

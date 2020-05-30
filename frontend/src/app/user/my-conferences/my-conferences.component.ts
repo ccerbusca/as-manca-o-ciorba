@@ -3,10 +3,8 @@ import {Conference} from '../shared/conference.model';
 import {ConferenceService} from '../shared/conference.service';
 import {PCMember} from '../shared/programCommiteeMember.model';
 import {Role} from '../shared/role.enum';
-
-export class ExpansionOverviewExample {
-  panelOpenState = false;
-}
+import {MatDialog} from '@angular/material/dialog';
+import {PostponeDialogComponent} from './postpone-dialog/postpone-dialog.component';
 
 @Component({
   selector: 'app-my-conferences',
@@ -18,7 +16,8 @@ export class MyConferencesComponent implements OnInit {
   user: PCMember;
   Role = Role;
 
-  constructor(private conferenceService: ConferenceService) {
+  constructor(private conferenceService: ConferenceService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -45,5 +44,12 @@ export class MyConferencesComponent implements OnInit {
   getRandom(): number {
     // this is here just for mockup reasons
     return Math.floor(Math.random() * 6) + 1;
+  }
+
+  openDialog(conference: Conference): void {
+    this.dialog.open(PostponeDialogComponent,
+      {width: '440px', data: {conference}})
+      .afterClosed().subscribe(_ =>
+      console.log('dialog closed'));
   }
 }
