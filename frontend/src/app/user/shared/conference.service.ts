@@ -6,12 +6,19 @@ import {Role} from './role.enum';
 import {User} from './user.model';
 import {Review} from './review.model';
 import {Bidding} from './bidding.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConferenceService {
   constructor() {
+  }
+
+  getConference(id: number): Observable<Conference> {
+    return this.getConferences().pipe(
+      map(conferences => conferences.find(conference => conference.id === id))
+    );
   }
 
   getConferences(): Observable<Conference[]> {
@@ -93,6 +100,10 @@ export class ConferenceService {
       });
     }
     return pcMembers;
+  }
+
+  updateConference(conference: Conference): void {
+    console.log('update', conference);
   }
 
 }
