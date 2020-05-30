@@ -24,7 +24,6 @@ export class PostponeDialogComponent implements OnInit {
 
   ngOnInit(): void {
     const currentDate: Date = new Date();
-    // @ts-ignore
     this.conference = this.data.conference;
     if (this.conference.proposalDeadline.getDate() > currentDate.getDate()) {
       this.phase = 'proposal';
