@@ -95,4 +95,7 @@ export class ConferenceService {
     return pcMembers;
   }
 
+  updateConference(conference: Conference): void {
+    console.log('update ', conference);
+  }
 }

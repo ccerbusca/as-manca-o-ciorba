@@ -25,8 +25,11 @@
           <!-- TODO if conference.proposalDeadline < Date -->
           <div *ngIf="getRandom() % 2 === 0; then biddingDoneBlock"></div>
           <ng-template #biddingDoneBlock>
-            <button mat-raised-button>Edit/Assign reviewers</button>
+            <button mat-raised-button>Assign reviewers</button>
           </ng-template>
+          <button (click)="openDialog(conference)" mat-raised-button style="margin-left: 10px">
+            Edit
+          </button>
         </ng-template>
 
         <div *ngIf="user.biddings.length > 0; then biddingsPendingBlock"></div>

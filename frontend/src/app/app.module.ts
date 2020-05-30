@@ -20,6 +20,7 @@ import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 import {ConferenceService} from './user/shared/conference.service';
+import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {ConferenceService} from './user/shared/conference.service';
     LogInComponent,
     MySubmissionsComponent,
     RecommendationDialogComponent,
-    MyConferencesComponent
+    MyConferencesComponent,
+    PostponeDialogComponent
   ],
   imports: [
     BrowserModule,
