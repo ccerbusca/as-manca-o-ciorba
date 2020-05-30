@@ -1,8 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DialogData} from '../../my-submissions/recommendation-dialog/recommendation-dialog.component';
 import {Conference} from '../../shared/conference.model';
 import {ConferenceService} from '../../shared/conference.service';
+
+export interface DialogData {
+  conference: Conference;
+}
+
 
 @Component({
   selector: 'app-postpone-dialog',
