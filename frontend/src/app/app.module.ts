@@ -20,8 +20,9 @@ import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 import {ConferenceService} from './user/shared/conference.service';
-import {PostponeDialogComponent} from "./user/my-conferences/postpone-dialog/postpone-dialog.component";
-import {ConferenceDetailComponent} from "./conference/conference-detail/conference-detail.component";
+import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
+import {ConferenceDetailComponent} from './conference/conference-detail/conference-detail.component';
+import {HomePageComponent} from './home-page/home-page.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {ConferenceDetailComponent} from "./conference/conference-detail/conferen
     RecommendationDialogComponent,
     MyConferencesComponent,
     PostponeDialogComponent,
-    ConferenceDetailComponent
+    ConferenceDetailComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,7 @@ export class ConferenceService {
   createConference(index: number): Conference {
     let conference: Conference;
     conference = new Conference();
+    conference.id = index;
     conference.title = 'Conference' + index;
     conference.startTime = new Date();
     conference.endTime = new Date();
@@ -39,6 +40,7 @@ export class ConferenceService {
     conference.assignmentDeadline = new Date();
     conference.evaluationDeadline = new Date();
     conference.resultsDeadline = new Date();
+    conference.generalInfo = 'flkgdfjkgdfjkgjdfngjdkfngjdfgnjdfgdfjkgdfkljgjdfg';
     conference.pcMembers = this.createPcMembers();
     return conference;
   }

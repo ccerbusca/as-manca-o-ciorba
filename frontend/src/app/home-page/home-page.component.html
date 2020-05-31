@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <mat-toolbar-row class="ml-3 mb-2">
+    <div>
+      <ng-container *ngIf="!isLoggedIn">
+        <a mat-button [routerLink]="'/login'">Log In</a>
+        <a mat-button [routerLink]="'/register'">Sign Up</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <a mat-button [routerLink]="'/my-conferences'">My Conferences</a>
+        <a mat-button [routerLink]="'/my-submissions'">My Submissions</a>
+      </ng-container>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="card-container">
+  <mat-card class="card" *ngFor="let c of conferences">
+    <mat-card-header>
+      <mat-card-title>{{c.title}}</mat-card-title>
+      <mat-card-subtitle>{{c.startTime | date: 'short'}} - {{c.endTime | date: 'short'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content><p>{{c.generalInfo}}</p></mat-card-content>
+    <mat-card-actions>
+      <a mat-button (click)="conferenceDetails(c.id)">DETAILS</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
