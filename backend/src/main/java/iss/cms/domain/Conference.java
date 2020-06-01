@@ -50,6 +50,6 @@ public class Conference extends NamedEntity {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Submission> submissions = new HashSet<>();
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Proposal> proposals = new HashSet<>();
 }

@@ -18,7 +18,6 @@ public interface ConferenceMapper {
     @InheritInverseConfiguration
     @Mapping(target = "conferencePassword", ignore = true)
     @Mapping(target = "sections", ignore = true)
-    @Mapping(target = "submissions", ignore = true)
     Conference fromDto(ConferenceDTO conferenceDTO);
 
     List<ConferenceDTO> toDtoList(List<Conference> conferences);

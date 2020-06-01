@@ -41,6 +41,6 @@ public class User extends NamedEntity {
     )
     private Set<Section> sections = new HashSet<>();
 
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany(mappedBy = "author")
     private Set<Proposal> proposals = new HashSet<>();
 }

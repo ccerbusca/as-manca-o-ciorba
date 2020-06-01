@@ -9,42 +9,34 @@
           {{conference.title}}
         </mat-panel-title>
         <mat-panel-description>
-          <!--TODO change condition, it's like this just for mockup purposes -->
-          <div *ngIf="getRandom() % 2 === 0; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock>
+          <div *ngIf="reviewToBeDone(conference)">
             <strong> Reviews to be done! </strong>
-          </ng-template>
-          <ng-template #elseBlock>
+          </div>
+          <div *ngIf="biddingToBeDone(conference)">
             <strong> Biddings pending! </strong>
-          </ng-template>
+          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div style="float: right">
         <div *ngIf="user.role !== Role.MEMBER; then elevatedBlock"></div>
         <ng-template #elevatedBlock>
-          <!-- TODO if conference.proposalDeadline < Date -->
-          <div *ngIf="getRandom() % 2 === 0; then biddingDoneBlock"></div>
-          <ng-template #biddingDoneBlock>
+          <div *ngIf="ifBiddingDone(conference)">
             <button mat-raised-button>Assign reviewers</button>
-          </ng-template>
+          </div>
           <button (click)="openDialog(conference)" mat-raised-button style="margin-left: 10px">
             Edit
           </button>
         </ng-template>
-
-        <div *ngIf="user.biddings.length > 0; then biddingsPendingBlock"></div>
-        <ng-template #biddingsPendingBlock>
+        <div *ngIf="biddingToBeDone(conference)">
           <button color="warn" mat-raised-button style="margin-left: 10px">
             Bid
           </button>
-        </ng-template>
-
-        <div *ngIf="user.reviews.length > 0; then reviewsPendingBlock"></div>
-        <ng-template #reviewsPendingBlock>
+        </div>
+        <div *ngIf="reviewToBeDone(conference)">
           <button color="warn" mat-raised-button style="margin-left: 10px">
             Review
           </button>
-        </ng-template>
+        </div>
       </div>
     </mat-expansion-panel>
     <br>

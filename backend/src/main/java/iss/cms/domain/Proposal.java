@@ -17,8 +17,9 @@ import java.util.Set;
 @Entity
 public class Proposal extends NamedEntity {
 
-    private String name;
     private LocalDateTime uploadTime;
+
+    private Status status;
 
     @ElementCollection
     private Set<String> keywords = new HashSet<>();
@@ -26,21 +27,20 @@ public class Proposal extends NamedEntity {
     @ElementCollection
     private Set<String> topics = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "submission_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "proposal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Submission submission;
 
-    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Bidding> biddings = new HashSet<>();
 
-    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "authorship",
-            joinColumns = {@JoinColumn(name = "proposal_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    private Set<User> authors = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "conference_id", nullable = false)
+    private Conference conference;
+
+    @ManyToOne
+    @JoinColumn(name = "proposal_id", nullable = false)
+    private User author;
 }

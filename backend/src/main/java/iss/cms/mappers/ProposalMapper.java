@@ -1,0 +1,21 @@
+package iss.cms.mappers;
+
+import iss.cms.domain.Proposal;
+import iss.cms.domain.dto.ProposalDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+@Mapper(uses = {ReviewMapper.class, BiddingMapper.class, SubmissionMapper.class, UserMapper.class})
+public interface ProposalMapper {
+
+    @Mapping(target = "conferenceID", source = "conference.id")
+    ProposalDTO toDto(Proposal proposal);
+
+    @Mapping(target = "conference", ignore = true)
+    @Mapping(target = "topics", ignore = true)
+    @Mapping(target = "keywords", ignore = true)
+    @Mapping(target = "author", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    Proposal fromDto(ProposalDTO proposalDTO);
+
+}

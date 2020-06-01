@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
-import {Submission} from '../shared/submission.model';
-import {SubmissionService} from '../shared/submission.service';
-import {MatSort, MatSortable} from '@angular/material/sort';
+import {ProposalService} from '../../shared/proposal.service';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {RecommendationDialogComponent} from './recommendation-dialog/recommendation-dialog.component';
+import {Proposal} from '../../shared/models/proposal.model';
+import {Status} from '../../shared/models/status.enum';
 
 @Component({
   selector: 'app-my-submissions',
@@ -14,28 +15,35 @@ import {RecommendationDialogComponent} from './recommendation-dialog/recommendat
 })
 export class MySubmissionsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  submissions: Submission[];
-  dataSource: MatTableDataSource<Submission>;
+  proposals: Proposal[];
+  dataSource: MatTableDataSource<Proposal>;
   displayedColumns: string[] = ['title', 'status', 'abstractPaperUrl', 'fullPaperUrl', 'recommendation'];
 
-  constructor(private submissionService: SubmissionService,
+  Status = Status;
+
+  constructor(private proposalService: ProposalService,
               private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.submissionService.getSubmissions()
-      .subscribe(submissions => {
-        this.submissions = submissions;
-        this.dataSource = new MatTableDataSource(this.submissions);
+    this.proposalService.getProposals()
+      .subscribe(proposals => {
+        this.proposals = proposals;
+        this.dataSource = new MatTableDataSource(this.proposals);
         this.dataSource.sort = this.sort;
-        console.log(this.submissions);
+        console.log(this.proposals);
       });
   }
 
-  openDialog(submission: Submission): void {
+  openDialog(proposal: Proposal): void {
     this.dialog.open(RecommendationDialogComponent,
-      {width: '500px', data: {text: submission.recommendation}})
-      .afterClosed().subscribe(_ =>
-      console.log('dialog closed'));
+      {width: '500px', data: {text: proposal.reviews
+                                              .filter(review => !!review.recommendation)
+                                              .map(review => review.recommendation)}
+      }).afterClosed().subscribe(_ => console.log('dialog closed'));
+  }
+
+  hasRecommendations(proposal: Proposal): boolean {
+    return proposal.reviews.some(review => !!review.recommendation);
   }
 }

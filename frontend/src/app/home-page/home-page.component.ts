@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/auth/auth.service';
-import {ConferenceService} from '../user/shared/conference.service';
-import {Conference} from '../user/shared/conference.model';
+import {ConferenceService} from '../shared/conference.service';
+import {Conference} from '../shared/models/conference.model';
 import {Router} from '@angular/router';
 
 @Component({

@@ -1,18 +1,21 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {Conference} from './conference.model';
-import {PCMember} from './programCommiteeMember.model';
-import {Role} from './role.enum';
-import {User} from './user.model';
-import {Review} from './review.model';
-import {Bidding} from './bidding.model';
+import {Observable} from 'rxjs';
+import {Conference} from './models/conference.model';
+import {PCMember} from './models/program-commitee-member.model';
+import {Role} from './models/role.enum';
+import {User} from './models/user.model';
+import {Review} from './models/review.model';
+import {Bidding} from './models/bidding.model';
 import {map} from 'rxjs/operators';
+import {ConfigService} from './config.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConferenceService {
-  constructor() {
+
+  constructor(private httpClient: HttpClient) {
   }
 
   getConference(id: number): Observable<Conference> {
@@ -22,11 +25,11 @@ export class ConferenceService {
   }
 
   getConferences(): Observable<Conference[]> {
-    const conferences: Conference[] = [];
-    for (let i = 0; i < 10; i++) {
-      conferences.push(this.createConference(i));
-    }
-    return of(conferences);
+    return this.httpClient.get<Conference[]>(`${ConfigService.configuration.backendPath}/api/conferences`);
+  }
+
+  getConferencesForUser(user: string): Observable<Conference[]> {
+    return this.getConferences();
   }
 
   createConference(index: number): Conference {
@@ -59,9 +62,7 @@ export class ConferenceService {
     pcMembers.push({
       role: Role.CHAIR,
       personalWebpage: 'www.page.pl',
-      user: chair,
-      reviews,
-      biddings
+      user: chair
     });
     for (let i = 0; i < 3; i++) {
       const user: User = new User();
@@ -77,9 +78,7 @@ export class ConferenceService {
       pcMembers.push({
         role: Role.CO_CHAIR,
         personalWebpage: 'www.page' + i + '.pl',
-        user,
-        reviews,
-        biddings
+        user
       });
     }
     for (let i = 0; i < 5; i++) {
@@ -96,9 +95,7 @@ export class ConferenceService {
       pcMembers.push({
         role: Role.MEMBER,
         personalWebpage: 'www.page' + i + '.pl',
-        user,
-        reviews,
-        biddings
+        user
       });
     }
     return pcMembers;
@@ -107,5 +104,7 @@ export class ConferenceService {
   updateConference(conference: Conference): void {
     console.log('update', conference);
   }
+
+
 
 }

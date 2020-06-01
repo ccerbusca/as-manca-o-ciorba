@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {PCMember} from './programCommiteeMember.model';
-import {User} from "./user.model";
-import {Review} from "./review.model";
-import {Bidding} from "./bidding.model";
-import {Role} from "./role.enum";
+import {PCMember} from './models/program-commitee-member.model';
+import {User} from './models/user.model';
+import {Review} from './models/review.model';
+import {Bidding} from './models/bidding.model';
+import {Role} from './models/role.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -31,9 +31,7 @@ export class UserService {
     pcMembers.push({
       role: Role.CHAIR,
       personalWebpage: 'www.page.pl',
-      user: chair,
-      reviews,
-      biddings
+      user: chair
     });
     for (let i = 0; i < 3; i++) {
       const user: User = new User();
@@ -49,9 +47,7 @@ export class UserService {
       pcMembers.push({
         role: Role.CO_CHAIR,
         personalWebpage: 'www.page' + i + '.pl',
-        user,
-        reviews,
-        biddings
+        user
       });
     }
     for (let i = 0; i < 5; i++) {
@@ -68,9 +64,7 @@ export class UserService {
       pcMembers.push({
         role: Role.MEMBER,
         personalWebpage: 'www.page' + i + '.pl',
-        user,
-        reviews,
-        biddings
+        user
       });
     }
     return pcMembers;
