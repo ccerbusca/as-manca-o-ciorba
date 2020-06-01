@@ -25,7 +25,17 @@ export class ConferenceService {
   }
 
   getConferences(): Observable<Conference[]> {
-    return this.httpClient.get<Conference[]>(`${ConfigService.configuration.backendPath}/api/conferences`);
+    return this.httpClient.get<Conference[]>(`${ConfigService.configuration.backendPath}/api/conferences`).pipe(
+      map(conferences => conferences.map(conference => {
+        conference.startTime = new Date(conference.startTime);
+        conference.resultsDeadline = new Date(conference.resultsDeadline);
+        conference.evaluationDeadline = new Date(conference.evaluationDeadline);
+        conference.assignmentDeadline = new Date(conference.assignmentDeadline);
+        conference.proposalDeadline = new Date(conference.proposalDeadline);
+        conference.endTime = new Date(conference.endTime);
+        return conference;
+      }))
+    );
   }
 
   getConferencesForUser(user: string): Observable<Conference[]> {
