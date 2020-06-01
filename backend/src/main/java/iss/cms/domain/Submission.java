@@ -21,14 +21,11 @@ public class Submission extends BaseEntity {
 
     private String fullPaperUrl;
 
-    @OneToOne(mappedBy = "submission")
+    @OneToOne
+    @JoinColumn(name = "proposal_id", referencedColumnName = "id")
     private Proposal proposal;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "conference_id", nullable = false)
-    private Conference conference;
 }

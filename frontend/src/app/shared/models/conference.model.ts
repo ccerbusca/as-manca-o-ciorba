@@ -1,9 +1,9 @@
-import {PCMember} from './programCommiteeMember.model';
+import {PCMember} from './program-commitee-member.model';
+import {Proposal} from './proposal.model';
 
 export class Conference {
   id: number;
   title: string;
-  password: string;
   generalInfo: string;
   startTime: Date;
   endTime: Date;
@@ -12,4 +12,5 @@ export class Conference {
   evaluationDeadline: Date;
   resultsDeadline: Date;
   pcMembers: PCMember[];
+  proposals: Proposal[];
 }

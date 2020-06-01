@@ -5,14 +5,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -37,12 +33,23 @@ public class Conference extends NamedEntity {
 
     private String generalInfo;
 
-    @ManyToMany(mappedBy = "conferences")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "committee_membership",
+            joinColumns = {@JoinColumn(name = "conference_id")},
+            inverseJoinColumns = {@JoinColumn(name = "pc_id")}
+    )
     private Set<ProgramCommitteeMember> programCommitteeMembers = new HashSet<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Section> sections = new HashSet<>();
 
-    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Submission> submissions = new HashSet<>();
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Proposal> proposals = new HashSet<>();
 }

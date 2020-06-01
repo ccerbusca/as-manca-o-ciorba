@@ -1,46 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Conference} from './conference.model';
-import {PCMember} from './programCommiteeMember.model';
-import {Role} from './role.enum';
-import {User} from './user.model';
-import {Review} from './review.model';
-import {Bidding} from './bidding.model';
-import {map} from 'rxjs/operators';
+import {PCMember} from './models/program-commitee-member.model';
+import {User} from './models/user.model';
+import {Review} from './models/review.model';
+import {Bidding} from './models/bidding.model';
+import {Role} from './models/role.enum';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ConferenceService {
+export class UserService {
   constructor() {
   }
 
-  getConference(id: number): Observable<Conference> {
-    return this.getConferences().pipe(
-      map(conferences => conferences.find(conference => conference.id === id))
-    );
-  }
-
-  getConferences(): Observable<Conference[]> {
-    const conferences: Conference[] = [];
-    for (let i = 0; i < 10; i++) {
-      conferences.push(this.createConference(i));
-    }
-    return of(conferences);
-  }
-
-  createConference(index: number): Conference {
-    let conference: Conference;
-    conference = new Conference();
-    conference.title = 'Conference' + index;
-    conference.startTime = new Date();
-    conference.endTime = new Date();
-    conference.proposalDeadline = new Date();
-    conference.assignmentDeadline = new Date();
-    conference.evaluationDeadline = new Date();
-    conference.resultsDeadline = new Date();
-    conference.pcMembers = this.createPcMembers();
-    return conference;
+  getPCMembers(): Observable<PCMember[]> {
+    return of(this.createPcMembers());
   }
 
   createPcMembers(): PCMember[] {
@@ -57,9 +31,7 @@ export class ConferenceService {
     pcMembers.push({
       role: Role.CHAIR,
       personalWebpage: 'www.page.pl',
-      user: chair,
-      reviews,
-      biddings
+      user: chair
     });
     for (let i = 0; i < 3; i++) {
       const user: User = new User();
@@ -75,9 +47,7 @@ export class ConferenceService {
       pcMembers.push({
         role: Role.CO_CHAIR,
         personalWebpage: 'www.page' + i + '.pl',
-        user,
-        reviews,
-        biddings
+        user
       });
     }
     for (let i = 0; i < 5; i++) {
@@ -94,16 +64,9 @@ export class ConferenceService {
       pcMembers.push({
         role: Role.MEMBER,
         personalWebpage: 'www.page' + i + '.pl',
-        user,
-        reviews,
-        biddings
+        user
       });
     }
     return pcMembers;
   }
-
-  updateConference(conference: Conference): void {
-    console.log('update', conference);
-  }
-
 }

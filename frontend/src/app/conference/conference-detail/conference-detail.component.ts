@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Conference} from '../../user/shared/conference.model';
-import {ConferenceService} from '../../user/shared/conference.service';
+import {Conference} from '../../shared/models/conference.model';
+import {ConferenceService} from '../../shared/conference.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({

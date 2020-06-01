@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Conference} from '../../shared/conference.model';
-import {ConferenceService} from '../../shared/conference.service';
+import {Conference} from '../../../shared/models/conference.model';
+import {ConferenceService} from '../../../shared/conference.service';
 
 export interface DialogData {
   conference: Conference;
