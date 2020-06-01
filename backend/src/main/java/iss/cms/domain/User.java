@@ -27,8 +27,8 @@ public class User extends NamedEntity {
     @Email
     private String email;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private ProgramCommitteeMember programCommitteeMember;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProgramCommitteeMember> programCommitteeMember = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Submission> submissions = new HashSet<>();

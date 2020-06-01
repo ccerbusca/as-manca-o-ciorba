@@ -10,18 +10,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@NamedEntityGraph(
-        name = "conference-pcmembers",
-        attributeNodes = { @NamedAttributeNode(value = "programCommitteeMembers", subgraph = "pcmember-user")},
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "pcmember-user",
-                        attributeNodes = {
-                                @NamedAttributeNode("user")
-                        }
-                )
-        }
-)
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
@@ -45,12 +33,23 @@ public class Conference extends NamedEntity {
 
     private String generalInfo;
 
-    @ManyToMany(mappedBy = "conferences")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "committee_membership",
+            joinColumns = {@JoinColumn(name = "conference_id")},
+            inverseJoinColumns = {@JoinColumn(name = "pc_id")}
+    )
     private Set<ProgramCommitteeMember> programCommitteeMembers = new HashSet<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Section> sections = new HashSet<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Submission> submissions = new HashSet<>();
 }

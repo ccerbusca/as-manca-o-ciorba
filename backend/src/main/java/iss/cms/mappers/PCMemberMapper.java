@@ -8,7 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(uses = {UserMapper.class})
 public interface PCMemberMapper {
 
-    @Mapping(target = "user", source = "user", qualifiedByName = "noPassword")
     ProgramCommitteeMemberDTO toDto(ProgramCommitteeMember programCommitteeMember);
 
     @Mapping(target = "id", ignore = true)

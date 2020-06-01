@@ -23,7 +23,7 @@ public class AuthService {
     }
 
     @Transactional
-    public void register(User user)
+    public User register(User user)
     {
         Optional<User> userByUsername = userRepository.findUserByUsername(user.getUsername());
         if (userByUsername.isPresent())
@@ -32,7 +32,7 @@ public class AuthService {
         if (userByEmail.isPresent())
             throw new EmailAlreadyTakenException();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public boolean login(User user)

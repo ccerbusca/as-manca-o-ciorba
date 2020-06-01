@@ -5,7 +5,6 @@ import iss.cms.domain.dto.UserDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 
 @Mapper
 public interface UserMapper {
@@ -17,10 +16,6 @@ public interface UserMapper {
     User fromDto(UserDTO userDTO);
 
     @InheritInverseConfiguration
-    UserDTO toDto(User user);
-
-    @Named("noPassword")
     @Mapping(target = "password", ignore = true)
-    UserDTO toDtoNoPassword(User user);
-
+    UserDTO toDto(User user);
 }
