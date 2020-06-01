@@ -5,15 +5,23 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@NamedEntityGraph(
+        name = "conference-pcmembers",
+        attributeNodes = { @NamedAttributeNode(value = "programCommitteeMembers", subgraph = "pcmember-user")},
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "pcmember-user",
+                        attributeNodes = {
+                                @NamedAttributeNode("user")
+                        }
+                )
+        }
+)
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
