@@ -8,6 +8,8 @@ import {PostponeDialogComponent} from './postpone-dialog/postpone-dialog.compone
 import {AuthService} from '../../shared/auth/auth.service';
 import {DatePipe} from '@angular/common';
 import {AddConferenceComponent} from '../../conference/add-conference/add-conference.component';
+import {UserService} from '../../shared/user.service';
+import {User} from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-my-conferences',
@@ -16,13 +18,14 @@ import {AddConferenceComponent} from '../../conference/add-conference/add-confer
 })
 export class MyConferencesComponent implements OnInit {
   conferences: Conference[];
-  user: PCMember;
+  user: User;
   Role = Role;
 
   constructor(private conferenceService: ConferenceService,
               private authService: AuthService,
               private dialog: MatDialog,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -34,7 +37,9 @@ export class MyConferencesComponent implements OnInit {
       .subscribe(conferences => {
         console.log(conferences);
         this.conferences = conferences;
-        this.user = this.conferences[0].pcMembers[0];
+        this.userService.getPCMemberByUsername(this.authService.currentUser).subscribe(
+          user => this.user = user,
+          _ => console.log('not found'));
       });
   }
 
@@ -66,10 +71,12 @@ export class MyConferencesComponent implements OnInit {
   }
 
   openAddDialog(): void {
-    this.dialog.open(AddConferenceComponent,
-      {width: '440px', data: {user: this.user}})
-      .afterClosed().subscribe(_ =>
-      console.log('dialog closed'));
+    this.dialog.open(AddConferenceComponent, {width: '440px', data: {user: this.user}}).afterClosed().subscribe(
+      conference => {
+        if (!!conference) {
+          this.conferenceService.createConference(conference).subscribe(_ => this.update());
+        }
+      });
   }
 
   reviewToBeDone(conference: Conference): boolean {
@@ -82,5 +89,9 @@ export class MyConferencesComponent implements OnInit {
 
   ifBiddingDone(conference: Conference): boolean {
     return conference.proposalDeadline.getTime() <= new Date().getTime();
+  }
+
+  getCurrentPCMember(conference: Conference): PCMember {
+    return conference.pcMembers.find(pcm => pcm.user.username === this.user.username);
   }
 }

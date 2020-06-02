@@ -27,6 +27,8 @@ public class User extends NamedEntity {
     @Email
     private String email;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProgramCommitteeMember> programCommitteeMember = new HashSet<>();
 

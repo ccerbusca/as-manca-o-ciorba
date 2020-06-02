@@ -23,6 +23,8 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "proposal_id", nullable = false)
     private Proposal proposal;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pc_id", nullable = false)
     private ProgramCommitteeMember pcMember;
