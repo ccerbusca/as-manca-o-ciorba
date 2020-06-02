@@ -1,0 +1,15 @@
+<h3 mat-dialog-title>Write your recommendation: </h3>
+
+<div mat-dialog-content>
+
+  <mat-form-field class="example-full-width" style="width: 550px;">
+    <label>
+      <textarea #recommendation matInput placeholder="..." rows="4"></textarea>
+    </label>
+  </mat-form-field>
+  <br>
+  <button (click)="close()" color="primary" mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="recommend(recommendation.value)" class="ml-2" color="primary" mat-dialog-close mat-raised-button>
+    Send
+  </button>
+</div>

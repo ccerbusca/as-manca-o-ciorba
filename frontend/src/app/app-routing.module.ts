@@ -8,6 +8,7 @@ import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 import {ConferenceDetailComponent} from './conference/conference-detail/conference-detail.component';
 import {HomePageComponent} from './home-page/home-page.component';
+import {ReviewComponent} from './user/review/review.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'my-submissions', component: MySubmissionsComponent, canActivate: [AuthGuardService]},
   {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]},
   {path: 'conference/:id', component: ConferenceDetailComponent},
+  {path: 'review/:id', component: ReviewComponent}
 ];
 
 @NgModule({

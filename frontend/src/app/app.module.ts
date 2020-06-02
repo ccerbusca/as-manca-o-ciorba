@@ -18,6 +18,9 @@ import {ConfigService} from './shared/config.service';
 import {AuthService} from './shared/auth/auth.service';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
+import {ReviewComponent} from './user/review/review.component';
+import {ReviewResultDialogComponent} from './user/review/review-result-dialog/review-result-dialog.component';
+import {ReviewRecommendationDialogComponent} from './user/review/review-recommendation-dialog/review-recommendation-dialog.component';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 import {ConferenceService} from './shared/conference.service';
 import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
@@ -40,7 +43,10 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     MyConferencesComponent,
     PostponeDialogComponent,
     ConferenceDetailComponent,
-    HomePageComponent
+    HomePageComponent,
+    ReviewComponent,
+    ReviewResultDialogComponent,
+    ReviewRecommendationDialogComponent
   ],
   imports: [
     BrowserModule,

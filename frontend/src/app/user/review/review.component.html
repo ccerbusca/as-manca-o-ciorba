@@ -1,0 +1,33 @@
+<div align="center">
+  <br><br><br><br>
+  <h1>Review</h1>
+  <br><br><br><br>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="title" matSortDirection="asc"
+             matSortDisableClear
+             style="width: 80%">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let proposal">{{proposal.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+
+      <mat-cell *matCellDef="let proposal">
+        <button mat-raised-button>Download Document</button>
+        <ng-container *ngIf="isAuthorOf(proposal);else recommendation">
+          <button (click)="openReviewDialog(proposal)" mat-raised-button>Review</button>
+        </ng-container>
+        <ng-template #recommendation>
+          <button (click)="openRecommendationDialog(proposal)" mat-raised-button>Recommend</button>
+          <button (click)="remove(proposal)" mat-icon-button>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+    <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+  </mat-table>
+</div>
