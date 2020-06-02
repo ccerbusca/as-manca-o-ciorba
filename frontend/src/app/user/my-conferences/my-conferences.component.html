@@ -17,25 +17,27 @@
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div style="float: right">
-        <div *ngIf="user.role !== Role.MEMBER; then elevatedBlock"></div>
-        <ng-template #elevatedBlock>
-          <div *ngIf="ifBiddingDone(conference)">
-            <button mat-raised-button>Assign reviewers</button>
-          </div>
-          <button (click)="openDialog(conference)" mat-raised-button style="margin-left: 10px">
-            Edit
-          </button>
-        </ng-template>
-        <div *ngIf="biddingToBeDone(conference)">
-          <button color="warn" mat-raised-button style="margin-left: 10px">
-            Bid
-          </button>
-        </div>
-        <div *ngIf="reviewToBeDone(conference)">
-          <button color="warn" mat-raised-button style="margin-left: 10px">
-            Review
-          </button>
+      <div>
+        <p>{{getCurrentDeadline(conference)}}</p>
+        <div style="float: right">
+          <ng-container *ngIf="user.role !== Role.MEMBER">
+            <ng-container *ngIf="ifBiddingDone(conference)">
+              <button mat-raised-button>Assign reviewers</button>
+            </ng-container>
+            <button (click)="openPostponeDialog(conference)" mat-raised-button style="margin-left: 10px">
+              Edit
+            </button>
+          </ng-container>
+          <ng-container *ngIf="biddingToBeDone(conference)">
+            <button color="warn" mat-raised-button style="margin-left: 10px">
+              Bid
+            </button>
+          </ng-container>
+          <ng-container *ngIf="reviewToBeDone(conference)">
+            <button color="warn" mat-raised-button style="margin-left: 10px">
+              Review
+            </button>
+          </ng-container>
         </div>
       </div>
     </mat-expansion-panel>

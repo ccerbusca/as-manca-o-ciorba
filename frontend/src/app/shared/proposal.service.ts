@@ -5,7 +5,7 @@ import {Status} from './models/status.enum';
 import {ReviewResult} from './models/review-result.enum';
 import {Review} from './models/review.model';
 import {AuthService} from './auth/auth.service';
-import {map} from "rxjs/operators";
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

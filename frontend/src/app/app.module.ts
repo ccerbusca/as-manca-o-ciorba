@@ -26,6 +26,7 @@ import {ConferenceService} from './shared/conference.service';
 import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
 import {ConferenceDetailComponent} from './conference/conference-detail/conference-detail.component';
 import {HomePageComponent} from './home-page/home-page.component';
+import {DatePipe} from '@angular/common';
 
 export function initConfig(config: ConfigService): () => Promise<void> {
   return () => config.loadConfiguration();
@@ -58,7 +59,7 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     HttpClientModule
   ],
   providers: [ {provide: APP_INITIALIZER, useFactory: initConfig, deps: [ConfigService], multi: true},
-    ConfigService, AuthService, AuthGuardService, AlreadyLoggedGuardService, ProposalService, ConferenceService],
+    ConfigService, AuthService, AuthGuardService, AlreadyLoggedGuardService, ProposalService, ConferenceService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

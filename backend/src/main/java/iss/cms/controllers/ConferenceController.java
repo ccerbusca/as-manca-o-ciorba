@@ -24,15 +24,18 @@ public class ConferenceController {
     }
 
     @RequestMapping(value = "/conferences", method = RequestMethod.GET)
-    public List<ConferenceDTO> getConferences()
-    {
+    public List<ConferenceDTO> getConferences() {
         return conferenceMapper.toDtoList(conferenceService.getConferences());
     }
 
     @RequestMapping(value = "/conferences", method = RequestMethod.POST)
-    public ConferenceDTO addConference(@RequestBody ConferenceDTO conferenceDTO)
-    {
+    public ConferenceDTO addConference(@RequestBody ConferenceDTO conferenceDTO) {
         return conferenceMapper.toDto(conferenceService.addConference(conferenceMapper.fromDto(conferenceDTO)));
+    }
+
+    @RequestMapping(value = "/conferences", method = RequestMethod.PUT)
+    public ConferenceDTO updateConference(@RequestBody ConferenceDTO conferenceDTO) {
+        return conferenceMapper.toDto(conferenceService.updateConference(conferenceMapper.fromDto(conferenceDTO)));
     }
 
 }
