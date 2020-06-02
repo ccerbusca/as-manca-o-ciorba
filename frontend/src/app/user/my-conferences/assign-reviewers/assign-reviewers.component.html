@@ -1,0 +1,12 @@
+<div class="center">
+  <br><br><br><br>
+  <h1 class="ml-3">Submissions</h1>
+  <br><br><br><br>
+
+  <mat-list *ngFor="let proposal of proposals">
+    <mat-list-item>
+      {{proposal.name}}
+      <button (click)="assign(proposal.name)" mat-raised-button style="margin-left: 3rem">Assign Reviewers</button>
+    </mat-list-item>
+  </mat-list>
+</div>

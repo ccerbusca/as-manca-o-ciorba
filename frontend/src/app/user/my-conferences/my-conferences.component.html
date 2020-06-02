@@ -23,7 +23,7 @@
           <div style="float: right">
             <ng-container *ngIf="getCurrentPCMember(conference).role !== Role.MEMBER">
               <ng-container *ngIf="ifBiddingDone(conference)">
-                <button mat-raised-button>Assign reviewers</button>
+                <button mat-raised-button (click)="goToAssignReviewers(conference.id)">Assign reviewers</button>
               </ng-container>
               <button (click)="openPostponeDialog(conference)" mat-raised-button style="margin-left: 10px">
                 Edit

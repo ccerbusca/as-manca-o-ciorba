@@ -6,6 +6,7 @@ import {ReviewResult} from './models/review-result.enum';
 import {Review} from './models/review.model';
 import {AuthService} from './auth/auth.service';
 import {map} from 'rxjs/operators';
+import {BidResult} from './models/bid-result.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +50,41 @@ export class ProposalService {
       uploadTime: new Date(),
       conferenceID: 5,
       reviews: [],
-      biddings: []
+      biddings: [],
+    });
+    return of(proposals);
+  }
+  getAcceptedProposals(conferenceId: number): Observable<Proposal[]> {
+    const proposals: Proposal[] = [];
+    proposals.push({
+      id: 806,
+      status: Status.ACCEPTED,
+      biddings: [
+        {
+        result: BidResult.NEUTRAL,
+        username: 'mihai'
+        },
+        {
+          result: BidResult.PLEASED,
+          username: 'andrei'
+        }
+      ],
+      submission: {
+        fullPaperUrl: 'full paper URL',
+        abstractPaperUrl: 'abstract paper URL',
+      },
+      name: 'muie1',
+      uploadTime: new Date()
+    });
+    proposals.push({
+                   id: 104,
+                   status: Status.ACCEPTED,
+                   submission: {
+                     fullPaperUrl: 'full paper URL',
+                     abstractPaperUrl: 'abstract paper URL',
+                   },
+                   name: 'muie2',
+                   uploadTime: new Date()
     });
     return of(proposals);
   }

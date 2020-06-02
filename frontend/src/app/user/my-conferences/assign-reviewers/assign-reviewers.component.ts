@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+import {ProposalService} from '../../../shared/proposal.service';
+import {ActivatedRoute} from '@angular/router';
+import {Proposal} from '../../../shared/models/proposal.model';
+import {MatDialog} from '@angular/material/dialog';
+import {AssignReviewersDialogComponent} from './assign-reviewers-dialog/assign-reviewers-dialog.component';
+
+
+
+@Component({
+  selector: 'app-assign-reviewers',
+  templateUrl: './assign-reviewers.component.html',
+  styleUrls: ['./assign-reviewers.component.scss']
+})
+export class AssignReviewersComponent implements OnInit {
+
+  proposals: Proposal[];
+  conferenceId: number;
+  constructor(private proposalService: ProposalService,
+              private route: ActivatedRoute,
+              private dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    this.conferenceId = +this.route.snapshot.paramMap.get('id');
+    this.proposalService.getAcceptedProposals(this.conferenceId).subscribe(proposals => this.proposals = proposals);
+  }
+
+  assign(proposalName): void {
+    const prop = this.proposals.filter(proposal => proposal.name === proposalName);
+    this.dialog.open(AssignReviewersDialogComponent, {
+      width: '400px',
+      data: {
+        biddings: prop[0].biddings
+      }
+    });
+  }
+}

@@ -10,6 +10,7 @@ import {DatePipe} from '@angular/common';
 import {AddConferenceComponent} from '../../conference/add-conference/add-conference.component';
 import {UserService} from '../../shared/user.service';
 import {User} from '../../shared/models/user.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-conferences',
@@ -25,7 +26,8 @@ export class MyConferencesComponent implements OnInit {
               private authService: AuthService,
               private dialog: MatDialog,
               private datePipe: DatePipe,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -93,5 +95,9 @@ export class MyConferencesComponent implements OnInit {
 
   getCurrentPCMember(conference: Conference): PCMember {
     return conference.pcMembers.find(pcm => pcm.user.username === this.user.username);
+  }
+
+  goToAssignReviewers(id): void {
+    this.router.navigate([`assign-reviewers/${id}`]);
   }
 }
