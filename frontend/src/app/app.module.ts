@@ -18,8 +18,6 @@ import {ConfigService} from './shared/config.service';
 import {AuthService} from './shared/auth/auth.service';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-guard.service';
-import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
-import {ConferenceService} from './user/shared/conference.service';
 import {ReviewComponent} from './user/review/review.component';
 import {ReviewResultDialogComponent} from './user/review/review-result-dialog/review-result-dialog.component';
 import {ReviewRecommendationDialogComponent} from './user/review/review-recommendation-dialog/review-recommendation-dialog.component';
@@ -45,8 +43,7 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     MyConferencesComponent,
     PostponeDialogComponent,
     ConferenceDetailComponent,
-    HomePageComponent
-    MyConferencesComponent,
+    HomePageComponent,
     ReviewComponent,
     ReviewResultDialogComponent,
     ReviewRecommendationDialogComponent
@@ -62,7 +59,6 @@ export function initConfig(config: ConfigService): () => Promise<void> {
   ],
   providers: [ {provide: APP_INITIALIZER, useFactory: initConfig, deps: [ConfigService], multi: true},
     ConfigService, AuthService, AuthGuardService, AlreadyLoggedGuardService, ProposalService, ConferenceService],
-  providers: [ConfigLoadingService, AuthService, AuthGuardService, AlreadyLoggedGuardService, SubmissionService, ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

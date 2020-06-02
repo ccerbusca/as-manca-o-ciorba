@@ -1,8 +1,7 @@
-import {ReviewResult} from './reviewResult.enum';
-import {PCMember} from './programCommiteeMember.model';
+import {ReviewResult} from './review-result.enum';
 
 export class Review {
+  username: string;
   recommendation: string;
   result: ReviewResult;
-  pcMember: PCMember;
 }

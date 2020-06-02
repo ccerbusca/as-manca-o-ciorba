@@ -1,11 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
-import {Proposal} from '../shared/proposal.model';
 import {MatTableDataSource} from '@angular/material/table';
-import {ProposalService} from '../shared/proposal.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ReviewResultDialogComponent} from './review-result-dialog/review-result-dialog.component';
 import {ReviewRecommendationDialogComponent} from './review-recommendation-dialog/review-recommendation-dialog.component';
+import {Proposal} from '../../shared/models/proposal.model';
+import {ProposalService} from '../../shared/proposal.service';
+import {AuthService} from "../../shared/auth/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-review',
@@ -20,11 +22,14 @@ export class ReviewComponent implements OnInit {
   displayedColumns: string[] = ['name', 'actions'];
 
   constructor(private proposalService: ProposalService,
+              private authService: AuthService,
+              private route: ActivatedRoute,
               private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.proposalService.getProposals()
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.proposalService.getProposalsByConferenceId(id)
       .subscribe(proposals => {
         this.proposals = proposals;
         this.dataSource = new MatTableDataSource(this.proposals);
@@ -33,8 +38,7 @@ export class ReviewComponent implements OnInit {
   }
 
   isAuthorOf(proposal: Proposal): boolean {
-
-    return !proposal.reviews.some(review => review.pcMember.user.username === localStorage.getItem('username'));
+    return !proposal.reviews.some(review => review.username === this.authService.currentUser);
   }
 
   openReviewDialog(proposal: Proposal): void {
@@ -54,13 +58,14 @@ export class ReviewComponent implements OnInit {
       {width: '600px'})
       .afterClosed().subscribe(recommendation => {
       if (!!recommendation) {
-        this.proposalService.recommend(proposal, recommendation);
-        // should remove the proposal from the list
+        this.proposalService.recommend(proposal, recommendation).subscribe(prop => this.remove(prop));
       }
     });
   }
 
   remove(proposal: any): void {
-    // should remove the proposal from the list
+    this.proposals = this.proposals.filter(p => p.id !== proposal.id);
+    this.dataSource = new MatTableDataSource(this.proposals);
+    this.dataSource.sort = this.sort;
   }
 }

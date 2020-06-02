@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogData} from '../../my-submissions/recommendation-dialog/recommendation-dialog.component';
-import {ReviewResult} from '../../shared/reviewResult.enum';
+import {ReviewResult} from '../../../shared/models/review-result.enum';
+
 
 @Component({
   selector: 'app-review-result-dialog',
