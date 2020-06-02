@@ -21,6 +21,7 @@
         <p>{{getCurrentDeadline(conference)}}</p>
         <div style="float: right">
           <ng-container *ngIf="user.role !== Role.MEMBER">
+            <mat-divider></mat-divider>
             <ng-container *ngIf="ifBiddingDone(conference)">
               <button mat-raised-button>Assign reviewers</button>
             </ng-container>
@@ -43,4 +44,7 @@
     </mat-expansion-panel>
     <br>
   </mat-accordion>
+  <button (click)="openAddDialog()" mat-raised-button style="margin-left: 10px">
+    Add
+  </button>
 </div>

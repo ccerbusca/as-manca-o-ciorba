@@ -1,0 +1,123 @@
+<div align="center">
+  <h3 mat-dialog-title>Conference Editor </h3>
+  <div mat-dialog-content>
+    <table>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" id="#Title">
+            <mat-label>Title</mat-label>
+            <input #Title matInput="string" placeholder="">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" id="#Password">
+            <mat-label>Password</mat-label>
+            <input #Password matInput="string" placeholder="">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" id="#generalInfo">
+            <mat-label>General Info</mat-label>
+            <input #generalInfo matInput="string" placeholder="">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Start date</mat-label>
+            <input matInput [matDatepicker]="StartDatePicker">
+            <mat-datepicker-toggle matSuffix [for]="StartDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #StartDatePicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>End date</mat-label>
+            <input matInput [matDatepicker]="EndDatePicker">
+            <mat-datepicker-toggle matSuffix [for]="EndDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #EndDatePicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Proposal Deadline</mat-label>
+            <input matInput [matDatepicker]="proposalDeadlinePicker">
+            <mat-datepicker-toggle matSuffix [for]="proposalDeadlinePicker"></mat-datepicker-toggle>
+            <mat-datepicker #proposalDeadlinePicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Assignment Deadline</mat-label>
+            <input matInput [matDatepicker]="assignmentDeadlinePicker">
+            <mat-datepicker-toggle matSuffix [for]="assignmentDeadlinePicker"></mat-datepicker-toggle>
+            <mat-datepicker #assignmentDeadlinePicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Evaluation Deadline</mat-label>
+            <input matInput [matDatepicker]="evaluationDeadlinePicker">
+            <mat-datepicker-toggle matSuffix [for]="evaluationDeadlinePicker"></mat-datepicker-toggle>
+            <mat-datepicker #evaluationDeadlinePicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Results Deadline</mat-label>
+            <input matInput [matDatepicker]="resultsDeadlinePicker">
+            <mat-datepicker-toggle matSuffix [for]="resultsDeadlinePicker"></mat-datepicker-toggle>
+            <mat-datepicker #resultsDeadlinePicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+
+        <table class="clients table table-bordered">
+          <tr>
+            <th class="header">ID</th>
+            <th class="header">Name</th>
+          </tr>
+          <tr *ngFor="let user of users | paginate: {itemsPerPage: 3, currentPage: page}"
+              [class.selected]="user === selectedUser"
+              (click)="updateSelected(user)">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+          </tr>
+        </table>
+
+
+        <div align="center" *ngIf="selectedUser">
+          <table class="table-striped">
+            <tr>
+              <td>
+                <button class="btn btn-outline-primary"
+                        (click)="addAsCoChair()">
+                  addAsCoChair{{selectedUser.name}}
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-outline-primary"
+                        [class.delete]="true"
+                        (click)="addAsMember();$event.stopPropagation()">
+                  addAsMember {{selectedUser.name}}
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <td>
+          <button (click)="addConference(Title.value,
+          Password.value,
+          generalInfo.value,
+          StartDatePicker,
+          EndDatePicker,
+          proposalDeadlinePicker,
+          assignmentDeadlinePicker,
+          evaluationDeadlinePicker,
+          resultsDeadlinePicker, )" color="warn" mat-raised-button
+                  style="margin-left: 10px; margin-right: 10px">
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

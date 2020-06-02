@@ -69,4 +69,24 @@ export class UserService {
     }
     return pcMembers;
   }
+  getUsers(): Observable<User[]> {
+    const users: User[] = [];
+    for (let i = 0; i < 10; i++) {
+      users.push({
+        name: 'name' + i,
+        username: ' username',
+        email: 'email',
+        password: 'password',
+       affiliation: 'affilation'
+      });
+    }
+    users.push({
+      name: 'test' ,
+      username: 'test' ,
+      email: 'test' ,
+      password: 'test' ,
+      affiliation: 'NICE'
+    });
+    return of(users);
+  }
 }

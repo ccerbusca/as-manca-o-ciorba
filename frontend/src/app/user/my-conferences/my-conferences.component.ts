@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {PostponeDialogComponent} from './postpone-dialog/postpone-dialog.component';
 import {AuthService} from '../../shared/auth/auth.service';
 import {DatePipe} from '@angular/common';
+import {AddConferenceComponent} from '../../conference/add-conference/add-conference.component';
 
 @Component({
   selector: 'app-my-conferences',
@@ -62,6 +63,13 @@ export class MyConferencesComponent implements OnInit {
           this.conferenceService.updateConference(conf).subscribe(_ => this.update());
         }
       });
+  }
+
+  openAddDialog(): void {
+    this.dialog.open(AddConferenceComponent,
+      {width: '440px', data: {user: this.user}})
+      .afterClosed().subscribe(_ =>
+      console.log('dialog closed'));
   }
 
   reviewToBeDone(conference: Conference): boolean {
