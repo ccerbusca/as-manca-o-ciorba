@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 export interface DialogData {
-  text: string;
+  text: string[];
 }
 
 @Component({
@@ -17,6 +17,10 @@ export class RecommendationDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get formattedText(): string {
+    return this.data.text.reduce((acc, t) => acc + '\n' + t);
   }
 
   close(): void {

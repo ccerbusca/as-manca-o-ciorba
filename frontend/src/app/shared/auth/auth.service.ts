@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ConfigLoadingService, Configuration} from '../config-loading-service';
+import {ConfigService} from '../config.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../../user/shared/user.model';
+import {User} from '../models/user.model';
 import {tap} from 'rxjs/operators';
 import * as moment from 'moment';
 
@@ -10,20 +10,16 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class AuthService {
-  private config: Configuration;
-
-  constructor(private configLoader: ConfigLoadingService,
-              private http: HttpClient) {
-    configLoader.loadConfiguration().subscribe(config => this.config = config);
+  constructor(private http: HttpClient) {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post(`${this.config.backendPath}/api/login`, user)
+    return this.http.post(`${ConfigService.configuration.backendPath}/api/login`, user)
       .pipe(tap(_ => this.setSession(user)));
   }
 
   register(user: User): Observable<any> {
-    return this.http.post(`${this.config.backendPath}/api/register`, user);
+    return this.http.post(`${ConfigService.configuration.backendPath}/api/register`, user);
   }
 
   logout(): void {
@@ -34,6 +30,10 @@ export class AuthService {
 
   loggedIn(): boolean {
     return !!localStorage.getItem('logged') && moment().isBefore(this.getExpiration());
+  }
+
+  get currentUser(): string {
+    return localStorage.getItem('username');
   }
 
   private setSession(user: User): void {

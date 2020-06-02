@@ -28,10 +28,9 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody @Valid UserDTO userDTO)
+    public ResponseEntity<UserDTO> register(@RequestBody @Valid UserDTO userDTO)
     {
-        authService.register(userMapper.fromDto(userDTO));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(userMapper.toDto(authService.register(userMapper.fromDto(userDTO))), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

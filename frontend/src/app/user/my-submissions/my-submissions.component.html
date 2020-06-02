@@ -1,13 +1,13 @@
 <div align="center">
   <br><br><br><br>
-  <h1>My Submissions</h1>
+  <h1>My Proposals</h1>
   <br><br><br><br>
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="title" matSortDirection="asc"
              matSortDisableClear
              style="width: 80%">
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-      <mat-cell *matCellDef="let submission">{{submission.title}}</mat-cell>
+      <mat-cell *matCellDef="let proposal">{{proposal.name}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
@@ -15,24 +15,24 @@
     </ng-container>
     <ng-container matColumnDef="abstractPaperUrl">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Abstract URL</mat-header-cell>
-      <mat-cell *matCellDef="let submission">{{submission.abstractPaperUrl}}</mat-cell>
+      <mat-cell *matCellDef="let proposal">{{proposal.submission.abstractPaperUrl}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="fullPaperUrl">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Full URL</mat-header-cell>
-      <mat-cell *matCellDef="let submission">{{submission.fullPaperUrl}}</mat-cell>
+      <mat-cell *matCellDef="let proposal">{{proposal.submission.fullPaperUrl}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="recommendation">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Recommendation</mat-header-cell>
 
-      <mat-cell *matCellDef="let submission">
-        <div *ngIf="submission.status === 'accepted'; then thenBlock else elseBlock"></div>
-        <ng-template #thenBlock>
-          <button (click)="openDialog(submission)" mat-raised-button>Available</button>
-        </ng-template>
-        <ng-template #elseBlock>-</ng-template>
+      <mat-cell *matCellDef="let proposal">
+        <div *ngIf="hasRecommendations(proposal); else noRecommendation">
+          <button (click)="openDialog(proposal)" mat-raised-button>View</button>
+        </div>
+        <ng-template #noRecommendation>-</ng-template>
       </mat-cell>
 
     </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
     <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
   </mat-table>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {Router} from '@angular/router';
-import {User} from '../user/shared/user.model';
+import {User} from '../shared/models/user.model';
 import {MatDialog} from '@angular/material/dialog';
 import {SignUpDialogComponent} from './sign-up-dialog/sign-up-dialog.component';
 import {AuthService} from '../shared/auth/auth.service';

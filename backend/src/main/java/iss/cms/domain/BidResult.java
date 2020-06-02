@@ -1,5 +1,5 @@
 package iss.cms.domain;
 
-enum BidResult {
+public enum BidResult {
     PLEASED, NEUTRAL, REFUSED
 }

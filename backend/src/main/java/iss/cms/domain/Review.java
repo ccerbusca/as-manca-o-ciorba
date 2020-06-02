@@ -23,7 +23,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "proposal_id", nullable = false)
     private Proposal proposal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pc_id", nullable = false)
     private ProgramCommitteeMember pcMember;
 

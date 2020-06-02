@@ -1,0 +1,41 @@
+<h2 class="ml-3">{{conference.title}}</h2>
+<div class="ml-3">
+    <ng-template #elseB>
+      <button mat-raised-button color="primary"  (click)="interested()">Interested</button>
+    </ng-template>
+    <ng-template #thenB>
+      <p>This meeting already took place</p>
+    </ng-template>
+  <div *ngIf="possibleToAttend; then thenB else elseB"></div>
+</div>
+
+<mat-tab-group mat-align-tabs="start" style="height: 600px">
+  <mat-tab label="General Info"><p class="ml-3"> {{conference.generalInfo}}</p></mat-tab>
+  <mat-tab label="Program Committee Members">
+    <mat-list>
+      <mat-list-item *ngFor="let pcMember of conference.pcMembers" class="ml-3" style="width: 600px">
+        <mat-icon mat-list-icon>face</mat-icon>
+        {{pcMember.user.name}}
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+  <mat-tab label="Application Details">
+    <div class="ml-3">
+      <p>Conference will begin on <b>{{conference.startTime | date: 'short'}}</b> and end on <b>{{conference.endTime | date: 'shortDate'}}</b></p>
+      <p>The deadline for sending proposals is: <b>{{conference.proposalDeadline | date: 'shortDate'}}</b></p>
+      <p>The deadline for assigning reviewers is: <b>{{conference.assignmentDeadline | date: 'shortDate'}}</b></p>
+      <p>The deadline for proposals evaluation is: <b>{{conference.evaluationDeadline | date: 'shortDate'}}</b></p>
+      <p>The deadline for results of the evaluation is: <b>{{conference.resultsDeadline | date: 'shortDate'}}</b></p>
+      <div>
+        <ng-template #thenBlock>
+          <p style="color: red">The deadline for paper submission has passed!</p>
+        </ng-template>
+        <ng-template #elseBlock>
+          <button mat-raised-button color="primary" (click)="apply()">Apply</button>
+        </ng-template>
+        <div *ngIf="possibleToSubmit; then thenBlock else elseBlock"></div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
