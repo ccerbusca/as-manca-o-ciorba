@@ -6,6 +6,7 @@ import {Role} from '../../shared/models/role.enum';
 import {MatDialog} from '@angular/material/dialog';
 import {PostponeDialogComponent} from './postpone-dialog/postpone-dialog.component';
 import {AuthService} from '../../shared/auth/auth.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-my-conferences',
@@ -19,10 +20,15 @@ export class MyConferencesComponent implements OnInit {
 
   constructor(private conferenceService: ConferenceService,
               private authService: AuthService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
+    this.update();
+  }
+
+  private update(): void {
     this.conferenceService.getConferencesForUser(this.authService.currentUser)
       .subscribe(conferences => {
         console.log(conferences);
@@ -31,11 +37,31 @@ export class MyConferencesComponent implements OnInit {
       });
   }
 
-  openDialog(conference: Conference): void {
+  getCurrentDeadline(conference: Conference): string {
+    const currentDate: Date = new Date();
+    if (conference.proposalDeadline.getDate() > currentDate.getDate()) {
+      return `Current deadline for proposals: ${this.datePipe.transform(conference.proposalDeadline)}`;
+    } else {
+      if (conference.assignmentDeadline.getDate() > currentDate.getDate()) {
+        return `Current deadline for assigning reviewers: ${this.datePipe.transform(conference.assignmentDeadline)}`;
+      } else {
+        if (conference.evaluationDeadline.getDate() > currentDate.getDate()) {
+          return `Current deadline for evaluating papers: ${this.datePipe.transform(conference.evaluationDeadline)}`;
+        } else {
+          return `Current deadline for presenting the results: ${this.datePipe.transform(conference.resultsDeadline)}`;
+        }
+      }
+    }
+  }
+
+  openPostponeDialog(conference: Conference): void {
     this.dialog.open(PostponeDialogComponent,
-      {width: '440px', data: {conference}})
-      .afterClosed().subscribe(_ =>
-      console.log('dialog closed'));
+      {width: '275px', data: {conference}})
+      .afterClosed().subscribe(conf => {
+        if (!!conf) {
+          this.conferenceService.updateConference(conf).subscribe(_ => this.update());
+        }
+      });
   }
 
   reviewToBeDone(conference: Conference): boolean {
@@ -47,6 +73,6 @@ export class MyConferencesComponent implements OnInit {
   }
 
   ifBiddingDone(conference: Conference): boolean {
-    return conference.assignmentDeadline.getTime() >= new Date().getTime();
+    return conference.proposalDeadline.getTime() <= new Date().getTime();
   }
 }

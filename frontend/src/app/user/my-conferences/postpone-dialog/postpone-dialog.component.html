@@ -1,21 +1,13 @@
 <div align="center">
   <h3 mat-dialog-title>Conference Editor </h3>
   <div mat-dialog-content>
-    <table>
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width" id="#daysInput">
-            <mat-label>Days</mat-label>
-            <input #daysInput matInput="number" placeholder="">
-          </mat-form-field>
-        </td>
-        <td>
-          <button (click)="updateConference(daysInput.value)" color="warn" mat-raised-button
-                  style="margin-left: 10px; margin-right: 10px">
-            Postpone {{phase}} deadline
-          </button>
-        </td>
-      </tr>
-    </table>
+    <mat-form-field class="example-full-width" id="#daysInput">
+      <mat-label>Days</mat-label>
+      <input #daysInput matInput="number" autocomplete="off">
+    </mat-form-field>
+    <button (click)="updateConference(daysInput.value)" color="warn" mat-raised-button
+            style="margin-left: 10px; margin-right: 10px">
+      Postpone {{phase}} deadline
+    </button>
   </div>
 </div>

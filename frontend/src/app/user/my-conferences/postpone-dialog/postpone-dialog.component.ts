@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Conference} from '../../../shared/models/conference.model';
-import {ConferenceService} from '../../../shared/conference.service';
 
 export interface DialogData {
   conference: Conference;
@@ -18,8 +17,7 @@ export class PostponeDialogComponent implements OnInit {
   conference: Conference;
 
   constructor(private dialogRef: MatDialogRef<PostponeDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private conferenceService: ConferenceService) {
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 
   ngOnInit(): void {
@@ -28,11 +26,11 @@ export class PostponeDialogComponent implements OnInit {
     if (this.conference.proposalDeadline.getDate() > currentDate.getDate()) {
       this.phase = 'proposal';
     } else {
-      if (this.conference.evaluationDeadline.getDate() > currentDate.getDate()) {
-        this.phase = 'evaluation';
+      if (this.conference.assignmentDeadline.getDate() > currentDate.getDate()) {
+        this.phase = 'assignment';
       } else {
-        if (this.conference.assignmentDeadline.getDate() > currentDate.getDate()) {
-          this.phase = 'assignment';
+        if (this.conference.evaluationDeadline.getDate() > currentDate.getDate()) {
+          this.phase = 'evaluation';
         } else {
           this.phase = 'results';
         }
@@ -45,18 +43,13 @@ export class PostponeDialogComponent implements OnInit {
     switch (this.phase) {
       case 'proposal':
         this.conference.proposalDeadline.setDate(this.conference.proposalDeadline.getDate() + addition);
-        break;
-      case 'evaluation':
-        this.conference.evaluationDeadline.setDate(this.conference.evaluationDeadline.getDate() + addition);
-        break;
       case 'assignment':
         this.conference.assignmentDeadline.setDate(this.conference.assignmentDeadline.getDate() + addition);
-        break;
+      case 'evaluation':
+        this.conference.evaluationDeadline.setDate(this.conference.evaluationDeadline.getDate() + addition);
       case 'results':
         this.conference.resultsDeadline.setDate(this.conference.resultsDeadline.getDate() + addition);
-        break;
     }
-    this.conferenceService.updateConference(this.conference);
-    this.dialogRef.close();
+    this.dialogRef.close(JSON.parse(JSON.stringify(this.conference)));
   }
 }

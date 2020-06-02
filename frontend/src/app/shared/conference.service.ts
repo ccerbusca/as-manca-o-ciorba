@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject} from 'rxjs';
 import {Conference} from './models/conference.model';
 import {PCMember} from './models/program-commitee-member.model';
 import {Role} from './models/role.enum';
 import {User} from './models/user.model';
 import {Review} from './models/review.model';
 import {Bidding} from './models/bidding.model';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {ConfigService} from './config.service';
 import {HttpClient} from '@angular/common/http';
 
@@ -14,6 +14,8 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root',
 })
 export class ConferenceService {
+  private readonly conferencesChangedSubject = new ReplaySubject(1);
+  private readonly conferencesChanged$ = this.conferencesChangedSubject.asObservable();
 
   constructor(private httpClient: HttpClient) {
   }
@@ -22,6 +24,10 @@ export class ConferenceService {
     return this.getConferences().pipe(
       map(conferences => conferences.find(conference => conference.id === id))
     );
+  }
+
+  get conferencesChanged(): Observable<any> {
+    return this.conferencesChanged$;
   }
 
   getConferences(): Observable<Conference[]> {
@@ -40,6 +46,14 @@ export class ConferenceService {
 
   getConferencesForUser(user: string): Observable<Conference[]> {
     return this.getConferences();
+  }
+
+  updateConference(conference: Conference): Observable<Conference> {
+    return this.httpClient.put<Conference>(`${ConfigService.configuration.backendPath}/api/conferences`, conference).pipe(
+      tap(c => {
+        this.conferencesChangedSubject.next();
+      })
+    );
   }
 
   createConference(index: number): Conference {
@@ -110,9 +124,4 @@ export class ConferenceService {
     }
     return pcMembers;
   }
-
-  updateConference(conference: Conference): Observable<Conference> {
-    return this.httpClient.put<Conference>('http://localhost:8080/api/conferences', conference);
-  }
-
 }
