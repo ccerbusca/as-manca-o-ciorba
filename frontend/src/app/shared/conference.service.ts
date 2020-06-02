@@ -111,10 +111,8 @@ export class ConferenceService {
     return pcMembers;
   }
 
-  updateConference(conference: Conference): void {
-    console.log('update', conference);
+  updateConference(conference: Conference): Observable<Conference> {
+    return this.httpClient.put<Conference>('http://localhost:8080/api/conferences', conference);
   }
-
-
 
 }

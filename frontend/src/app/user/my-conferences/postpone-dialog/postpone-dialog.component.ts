@@ -56,7 +56,6 @@ export class PostponeDialogComponent implements OnInit {
         this.conference.resultsDeadline.setDate(this.conference.resultsDeadline.getDate() + addition);
         break;
     }
-
     this.conferenceService.updateConference(this.conference);
     this.dialogRef.close();
   }
