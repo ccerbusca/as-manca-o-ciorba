@@ -7,6 +7,7 @@ import {AlreadyLoggedGuardService} from './shared/auth/guards/already-logged-gua
 import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
 import {AuthGuardService} from './shared/auth/guards/auth-guard.service';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
+import {ReviewComponent} from './user/review/review.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'signup', component: SignUpComponent, canActivate: [AlreadyLoggedGuardService]},
   {path: 'login', component: LogInComponent, canActivate: [AlreadyLoggedGuardService]},
   {path: 'my-submissions', component: MySubmissionsComponent, canActivate: [AuthGuardService]},
-  {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]}
+  {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]},
+  {path: 'review', component: ReviewComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,11 @@
+<h3 mat-dialog-title>Chose a result: </h3>
+
+<div mat-dialog-content>
+
+  <mat-button-toggle-group #result="matButtonToggleGroup" class="mb-2">
+    <mat-button-toggle *ngFor="let result of values()" [value]="[result]">{{result}}</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <button (click)="close()" color="primary" mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="review(result.value)" class="ml-2" color="primary" mat-dialog-close mat-raised-button>Send</button>
+</div>
