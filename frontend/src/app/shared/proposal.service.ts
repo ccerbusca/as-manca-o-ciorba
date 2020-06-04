@@ -8,19 +8,26 @@ import {AuthService} from './auth/auth.service';
 import {map} from 'rxjs/operators';
 import {BidResult} from './models/bid-result.enum';
 import {Bidding} from './models/bidding.model';
+import {HttpClient} from '@angular/common/http';
+import {ConfigService} from './config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProposalService {
 
-  constructor(private authService: AuthService) {
+  constructor(private http: HttpClient,
+              private authService: AuthService) {
   }
 
   getProposalsByConferenceId(id: number): Observable<Proposal[]> {
     return this.getProposals().pipe(
       map(proposals => proposals.filter(p => p.conferenceID === id))
     );
+  }
+
+  getProposalByUsername(username: string): Observable<Proposal[]> {
+    return this.http.get<Proposal[]>(`${ConfigService.configuration.backendPath}/api/proposals/${username}`);
   }
 
   getProposals(): Observable<Proposal[]> {

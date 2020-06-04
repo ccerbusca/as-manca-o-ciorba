@@ -4,6 +4,7 @@ import {Conference} from './models/conference.model';
 import {map, tap} from 'rxjs/operators';
 import {ConfigService} from './config.service';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from './auth/auth.service';
 
 
 @Injectable({
@@ -13,7 +14,8 @@ export class ConferenceService {
   private readonly conferencesChangedSubject = new ReplaySubject(1);
   private readonly conferencesChanged$ = this.conferencesChangedSubject.asObservable();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private authService: AuthService) {
   }
 
   getConference(id: number): Observable<Conference> {
@@ -41,7 +43,8 @@ export class ConferenceService {
   }
 
   getConferencesForUser(user: string): Observable<Conference[]> {
-    return this.getConferences();
+    return this.getConferences().pipe(map(conf => conf.filter(conference =>
+      conference.pcMembers.some(member => member.user.username === this.authService.currentUser))));
   }
 
   updateConference(conference: Conference): Observable<Conference> {

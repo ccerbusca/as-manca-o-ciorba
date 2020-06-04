@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(uses = {PCMemberMapper.class})
+@Mapper(uses = {PCMemberMapper.class, ProposalMapper.class})
 public interface ConferenceMapper {
 
     @Mapping(target = "title", source = "name")

@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Conference Editor </h1>
+<div mat-dialog-content>
+  <form [formGroup]="proposalForm">
+    <mat-form-field class="dblock">
+      <mat-label>Title</mat-label>
+      <input matInput="string" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Keywords (separated by commas)</mat-label>
+      <input matInput="string" formControlName="keywords">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Topics (separated by commas)</mat-label>
+      <input matInput="string" formControlName="topics">
+    </mat-form-field>
+
+  </form>
+
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="proposalForm.invalid">Add</button>
+</div>

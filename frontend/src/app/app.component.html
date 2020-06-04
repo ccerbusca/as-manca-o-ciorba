@@ -1,1 +1,16 @@
+<mat-toolbar class="mb-2">
+  <mat-toolbar-row class="ml-3">
+    <div>
+      <a mat-button [routerLink]="'/'">Home</a>
+      <ng-container *ngIf="!isLoggedIn">
+        <a mat-button [routerLink]="'/login'">Log In</a>
+        <a mat-button [routerLink]="'/register'">Sign Up</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <a mat-button [routerLink]="'/my-conferences'">My Conferences</a>
+        <a mat-button [routerLink]="'/my-proposals'">My Proposals</a>
+      </ng-container>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>
