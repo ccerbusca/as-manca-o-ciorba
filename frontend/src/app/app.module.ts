@@ -33,6 +33,8 @@ import {AssignReviewersComponent} from './user/my-conferences/assign-reviewers/a
 import {AssignReviewersDialogComponent} from './user/my-conferences/assign-reviewers/assign-reviewers-dialog/assign-reviewers-dialog.component';
 import {BidComponent} from './user/bid/bid.component';
 import {BidResultDialogComponent} from './user/bid/bid-result-dialog/bid-result-dialog.component';
+import {InterestedDialogComponent} from './conference/conference-detail/interested-dialog/interested-dialog.component';
+
 
 export function initConfig(config: ConfigService): () => Promise<void> {
   return () => config.loadConfiguration();
@@ -59,6 +61,7 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     AssignReviewersDialogComponent,
     BidComponent,
     BidResultDialogComponent,
+    InterestedDialogComponent
   ],
   imports: [
     BrowserModule,
