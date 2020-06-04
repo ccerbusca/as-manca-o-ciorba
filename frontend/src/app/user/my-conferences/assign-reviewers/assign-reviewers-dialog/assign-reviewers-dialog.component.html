@@ -1,6 +1,6 @@
 <div>
   <mat-selection-list #bidsList [(ngModel)]="selectedBidders">
-    <mat-list-option *ngFor="let bid of data.biddings " [value]="bid">
+    <mat-list-option *ngFor="let bid of data.proposalBiddings " [value]="bid">
       {{bid.username}},{{bid.result}}
     </mat-list-option>
   </mat-selection-list>

@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]},
   {path: 'conference/:id', component: ConferenceDetailComponent},
   {path: 'review/:id', component: ReviewComponent, canActivate: [AuthGuardService]},
-  {path: 'assign-reviewers/:id', component: AssignReviewersComponent},
+  {path: 'assign-reviewers/:id', component: AssignReviewersComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

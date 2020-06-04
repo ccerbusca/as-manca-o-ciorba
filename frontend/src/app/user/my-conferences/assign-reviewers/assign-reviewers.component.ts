@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Proposal} from '../../../shared/models/proposal.model';
 import {MatDialog} from '@angular/material/dialog';
 import {AssignReviewersDialogComponent} from './assign-reviewers-dialog/assign-reviewers-dialog.component';
+import {Bidding} from '../../../shared/models/bidding.model';
 
 
 
@@ -25,12 +26,12 @@ export class AssignReviewersComponent implements OnInit {
     this.proposalService.getAcceptedProposals(this.conferenceId).subscribe(proposals => this.proposals = proposals);
   }
 
-  assign(proposalName): void {
-    const prop = this.proposals.filter(proposal => proposal.name === proposalName);
+  assign(propId: number, biddings: Bidding[]): void {
     this.dialog.open(AssignReviewersDialogComponent, {
       width: '400px',
       data: {
-        biddings: prop[0].biddings
+        proposalBiddings: biddings,
+        proposalId: propId
       }
     });
   }

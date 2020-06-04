@@ -57,8 +57,8 @@ export class ConferenceService {
     return this.httpClient.post<Conference>(`${ConfigService.configuration.backendPath}/api/conferences`, conference);
   }
 
-  addReviewToConference(conferenceId, review: Review): void {
-    console.log('Review added');
+  addReviewToProposal(propsalId: number, review: Review): void {
+    console.log('Review added to proposal', propsalId);
   }
 
 }
