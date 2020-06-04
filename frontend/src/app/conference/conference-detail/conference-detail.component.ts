@@ -40,11 +40,14 @@ export class ConferenceDetailComponent implements OnInit {
 
   interested(): void {
     this.userService.getPCMemberByUsername(this.authService.currentUser)
-      .subscribe(user => this.conference.interested.push(user));
-    this.conferenceService.updateConference(this.conference);
-    this.dialog.open(InterestedDialogComponent,
-      {width: '300px'})
-      .afterClosed().subscribe();
+      .subscribe(user => {
+        this.conference.interested.push(user);
+        this.conferenceService.updateConference(this.conference).subscribe();
+        console.log(this.conference);
+        this.dialog.open(InterestedDialogComponent,
+          {width: '300px'})
+          .afterClosed().subscribe();
+      });
   }
 
   private getConference(): void {
@@ -53,10 +56,10 @@ export class ConferenceDetailComponent implements OnInit {
   }
 
   canBeInterested(): boolean {
-    let result = false;
+    let result = true;
     this.conference.interested.forEach(user => {
-      if (user.name === this.authService.currentUser) {
-        result = true;
+      if (user.username === this.authService.currentUser) {
+        result = false;
       }
     });
     return result;

@@ -42,6 +42,7 @@ export class AddConferenceComponent implements OnInit {
     this.chair.user = this.data.user;
     this.chair.role = Role.CHAIR;
     this.conference.pcMembers = [this.chair];
+    this.conference.interested = [];
     this.initForm();
   }
 
