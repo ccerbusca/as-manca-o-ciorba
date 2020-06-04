@@ -81,6 +81,7 @@ export class AssignReviewersComponent implements OnInit {
       if (!!result) {
         this.proposalService.reviewChair(proposal, result).subscribe(reviewedProposal => {
           this.proposals.map(p => p.id === reviewedProposal.id ? reviewedProposal : p);
+          this.update();
         });
       }
     });
