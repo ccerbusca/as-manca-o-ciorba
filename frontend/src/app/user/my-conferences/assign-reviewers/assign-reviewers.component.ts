@@ -31,7 +31,10 @@ export class AssignReviewersComponent implements OnInit {
       width: '400px',
       data: {
         proposalBiddings: biddings,
-        proposalId: propId
+      }
+    }).afterClosed().subscribe(reviews => {
+      if (!!reviews) {
+        reviews.forEach(review => this.proposalService.addReviewToProposal(propId, review));
       }
     });
   }

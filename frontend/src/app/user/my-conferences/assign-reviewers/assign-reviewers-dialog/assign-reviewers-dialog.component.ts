@@ -1,14 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Bidding} from '../../../../shared/models/bidding.model';
-import {ConferenceService} from '../../../../shared/conference.service';
-import {ActivatedRoute} from '@angular/router';
 import {Review} from '../../../../shared/models/review.model';
-import {Proposal} from '../../../../shared/models/proposal.model';
 
 export class DialogData {
   proposalBiddings: Bidding[];
-  proposalId: number;
 }
 
 @Component({
@@ -20,8 +16,8 @@ export class AssignReviewersDialogComponent implements OnInit {
 
   selectedBidders: Bidding[] = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private conferenceService: ConferenceService,
-              private route: ActivatedRoute) { }
+              private dialogRef: MatDialogRef<AssignReviewersDialogComponent>,
+              ) { }
 
   ngOnInit(): void {
   }
@@ -30,11 +26,13 @@ export class AssignReviewersDialogComponent implements OnInit {
   }
 
   assign(): void {
+    const reviews: Review[] = [];
     this.selectedBidders.forEach(bid => {
       const r: Review = {
         username: bid.username
       };
-      this.conferenceService.addReviewToProposal(this.data.proposalId, r);
+      reviews.push(r);
     });
+    this.dialogRef.close(reviews);
   }
 }

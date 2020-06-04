@@ -102,4 +102,8 @@ export class ProposalService {
     review.recommendation = recommendation;
     return of(proposal);
   }
+
+  addReviewToProposal(propsalId: number, review: Review): void {
+    console.log('Review added to proposal', propsalId);
+  }
 }
