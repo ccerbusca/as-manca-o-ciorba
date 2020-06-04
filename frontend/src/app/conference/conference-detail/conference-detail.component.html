@@ -1,7 +1,9 @@
 <h2 class="ml-3">{{conference.title}}</h2>
 <div class="ml-3">
     <ng-template #elseB>
-      <button mat-raised-button color="primary"  (click)="interested()">Interested</button>
+      <div *ngIf="isInterested()">
+        <button (click)="interested()" color="primary" mat-raised-button>Interested</button>
+      </div>
     </ng-template>
     <ng-template #thenB>
       <p>This meeting already took place</p>

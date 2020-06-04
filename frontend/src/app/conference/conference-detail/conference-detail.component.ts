@@ -51,4 +51,14 @@ export class ConferenceDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.conferenceService.getConference(id).subscribe(conference => this.conference = conference);
   }
+
+  isInterested(): boolean {
+    let result = false;
+    this.conference.interested.forEach(user => {
+      if (user.name === this.authService.currentUser) {
+        result = true;
+      }
+    });
+    return result;
+  }
 }
