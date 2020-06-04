@@ -16,13 +16,16 @@
             <div *ngIf="biddingToBeDone(conference)">
               <strong> Biddings pending! </strong>
             </div>
+            <div *ngIf="contradictoryReviews(conference) && getCurrentPCMember(conference).role === Role.CHAIR">
+              <strong> Contradictory reviews! </strong>
+            </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div>
           <p>{{getCurrentDeadline(conference)}}</p>
           <div style="float: right">
             <ng-container *ngIf="getCurrentPCMember(conference).role !== Role.MEMBER">
-              <ng-container *ngIf="checkAssigningPhase(conference)">
+              <ng-container *ngIf="checkAssigningPhase(conference) || contradictoryReviews(conference)">
                 <button mat-raised-button (click)="goToAssignReviewers(conference.id)">Assign reviewers</button>
               </ng-container>
               <button (click)="openPostponeDialog(conference)" mat-raised-button style="margin-left: 10px">

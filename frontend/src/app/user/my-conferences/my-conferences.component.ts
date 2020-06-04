@@ -116,4 +116,23 @@ export class MyConferencesComponent implements OnInit {
   review(conference: Conference): void {
     this.router.navigate([`review/${conference.id}`]);
   }
+
+  contradictoryReviews(conference: Conference): boolean {
+    let f = 0;
+    conference.proposals.some(proposal => {
+      proposal.reviews.forEach(review => {
+        if ( +review.result.valueOf() > 0) {
+          if (proposal.reviews.some(bid2 => +bid2.result.valueOf() < 0)) {
+            f += 1;
+          }
+        }
+        if ( +review.result.valueOf() < 0) {
+          if (proposal.reviews.some(bid2 => +bid2.result.valueOf() > 0)) {
+            f += 1;
+          }
+        }
+      });
+    });
+    return f !== 0;
+  }
 }

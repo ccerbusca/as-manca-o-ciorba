@@ -5,8 +5,10 @@
 
   <mat-list *ngFor="let proposal of proposals">
     <mat-list-item>
+      <mat-icon *ngIf="hasContradictoryReviews(proposal)">warning</mat-icon>
       {{proposal.name}}
       <button (click)="assign(proposal)" mat-raised-button style="margin-left: 3rem">Assign Reviewers</button>
+      <button *ngIf="hasContradictoryReviews(proposal)" (click)="openReviewDialog(proposal)" mat-raised-button>Review</button>
     </mat-list-item>
   </mat-list>
 </div>
