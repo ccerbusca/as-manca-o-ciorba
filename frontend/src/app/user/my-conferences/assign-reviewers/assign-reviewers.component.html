@@ -6,7 +6,7 @@
   <mat-list *ngFor="let proposal of proposals">
     <mat-list-item>
       {{proposal.name}}
-      <button (click)="assign(proposal.id,proposal.biddings)" mat-raised-button style="margin-left: 3rem">Assign Reviewers</button>
+      <button (click)="assign(proposal)" mat-raised-button style="margin-left: 3rem">Assign Reviewers</button>
     </mat-list-item>
   </mat-list>
 </div>

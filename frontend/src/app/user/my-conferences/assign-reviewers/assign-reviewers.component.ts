@@ -22,19 +22,23 @@ export class AssignReviewersComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.conferenceId = +this.route.snapshot.paramMap.get('id');
-    this.proposalService.getAcceptedProposals(this.conferenceId).subscribe(proposals => this.proposals = proposals);
+      this.update();
   }
 
-  assign(propId: number, biddings: Bidding[]): void {
+  update(): void {
+    this.conferenceId = +this.route.snapshot.paramMap.get('id');
+    this.proposalService.getAcceptedProposalsWithoutReviewers(this.conferenceId).subscribe(proposals => this.proposals = proposals);
+  }
+
+  assign(proposal: Proposal): void {
     this.dialog.open(AssignReviewersDialogComponent, {
       width: '400px',
       data: {
-        proposalBiddings: biddings,
+        proposalBiddings: proposal.biddings,
       }
     }).afterClosed().subscribe(reviews => {
       if (!!reviews) {
-        reviews.forEach(review => this.proposalService.addReviewToProposal(propId, review));
+        reviews.forEach(review => this.proposalService.addReviewToProposal(proposal, review).subscribe(_ => this.update()));
       }
     });
   }

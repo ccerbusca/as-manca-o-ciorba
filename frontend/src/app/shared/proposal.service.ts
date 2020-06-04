@@ -54,7 +54,7 @@ export class ProposalService {
     });
     return of(proposals);
   }
-  getAcceptedProposals(conferenceId: number): Observable<Proposal[]> {
+  getAcceptedProposalsWithoutReviewers(conferenceId: number): Observable<Proposal[]> {
     const proposals: Proposal[] = [];
     proposals.push({
       id: 806,
@@ -103,7 +103,8 @@ export class ProposalService {
     return of(proposal);
   }
 
-  addReviewToProposal(propsalId: number, review: Review): void {
-    console.log('Review added to proposal', propsalId);
+  addReviewToProposal(proposal: Proposal, review: Review): Observable<Proposal> {
+    proposal.reviews.push(review);
+    return of(proposal);
   }
 }
