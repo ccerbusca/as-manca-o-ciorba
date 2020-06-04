@@ -9,6 +9,7 @@ import {MyConferencesComponent} from './user/my-conferences/my-conferences.compo
 import {ConferenceDetailComponent} from './conference/conference-detail/conference-detail.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {ReviewComponent} from './user/review/review.component';
+import {AssignReviewersComponent} from './user/my-conferences/assign-reviewers/assign-reviewers.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'my-conferences', component: MyConferencesComponent, canActivate: [AuthGuardService]},
   {path: 'conference/:id', component: ConferenceDetailComponent},
   {path: 'review/:id', component: ReviewComponent, canActivate: [AuthGuardService]},
+  {path: 'assign-reviewers/:id', component: AssignReviewersComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

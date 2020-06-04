@@ -1,0 +1,10 @@
+<div>
+  <mat-selection-list #bidsList [(ngModel)]="selectedBidders">
+    <mat-list-option *ngFor="let bid of data.proposalBiddings " [value]="bid">
+      {{bid.username}},{{bid.result}}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <button (click)="assign()" mat-raised-button [disabled]="canSubmit">Assign</button>
+  <div *ngIf="canSubmit"><p style="color: red">Between 2 and 4 reviewers should be selected</p></div>
+</div>
