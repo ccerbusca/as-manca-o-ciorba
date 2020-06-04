@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RecommendationDialogComponent} from './recommendation-dialog/recommendation-dialog.component';
 import {Proposal} from '../../shared/models/proposal.model';
 import {Status} from '../../shared/models/status.enum';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-submissions',

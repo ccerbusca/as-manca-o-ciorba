@@ -1,12 +1,10 @@
 package iss.cms.controllers;
 
 import iss.cms.domain.dto.ConferenceDTO;
+import iss.cms.domain.dto.UserDTO;
 import iss.cms.mappers.ConferenceMapper;
 import iss.cms.services.ConferenceService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +35,4 @@ public class ConferenceController {
     public ConferenceDTO updateConference(@RequestBody ConferenceDTO conferenceDTO) {
         return conferenceMapper.toDto(conferenceService.updateConference(conferenceMapper.fromDto(conferenceDTO)));
     }
-
 }

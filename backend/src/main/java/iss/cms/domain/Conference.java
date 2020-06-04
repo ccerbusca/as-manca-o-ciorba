@@ -45,6 +45,16 @@ public class Conference extends NamedEntity {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_interested",
+            joinColumns = {@JoinColumn(name = "conference_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> users = new HashSet<>();
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Section> sections = new HashSet<>();
 
