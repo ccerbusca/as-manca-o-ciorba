@@ -43,7 +43,6 @@ export class ConferenceDetailComponent implements OnInit {
       .subscribe(user => {
         this.conference.interested.push(user);
         this.conferenceService.updateConference(this.conference).subscribe();
-        console.log(this.conference);
         this.dialog.open(InterestedDialogComponent,
           {width: '300px'})
           .afterClosed().subscribe();
