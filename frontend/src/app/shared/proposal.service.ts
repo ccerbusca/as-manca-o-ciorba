@@ -7,6 +7,7 @@ import {Review} from './models/review.model';
 import {AuthService} from './auth/auth.service';
 import {map} from 'rxjs/operators';
 import {BidResult} from './models/bid-result.enum';
+import {Bidding} from './models/bidding.model';
 
 @Injectable({
   providedIn: 'root',
@@ -105,6 +106,14 @@ export class ProposalService {
 
   addReviewToProposal(proposal: Proposal, review: Review): Observable<Proposal> {
     proposal.reviews.push(review);
+    return of(proposal);
+  }
+
+  bid(proposal: Proposal, result: any): Observable<Proposal> {
+    const bid = new Bidding();
+    bid.result = result;
+    bid.username = this.authService.currentUser;
+    proposal.biddings.push(bid);
     return of(proposal);
   }
 }

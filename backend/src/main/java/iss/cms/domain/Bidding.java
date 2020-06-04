@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class Bidding extends BaseEntity {
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private BidResult result;
 
     @ManyToOne

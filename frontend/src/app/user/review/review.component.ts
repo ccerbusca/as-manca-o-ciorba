@@ -6,8 +6,8 @@ import {ReviewResultDialogComponent} from './review-result-dialog/review-result-
 import {ReviewRecommendationDialogComponent} from './review-recommendation-dialog/review-recommendation-dialog.component';
 import {Proposal} from '../../shared/models/proposal.model';
 import {ProposalService} from '../../shared/proposal.service';
-import {AuthService} from "../../shared/auth/auth.service";
-import {ActivatedRoute} from "@angular/router";
+import {AuthService} from '../../shared/auth/auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-review',

@@ -81,6 +81,18 @@ export class MyConferencesComponent implements OnInit {
       });
   }
 
+  checkBidPhase(conference: Conference): boolean {
+    return conference.proposalDeadline > new Date();
+  }
+
+  checkEvaluatePhase(conference: Conference): boolean {
+    return conference.assignmentDeadline < new Date() && conference.evaluationDeadline > new Date();
+  }
+
+  checkAssigningPhase(conference: Conference): boolean {
+    return conference.proposalDeadline < new Date() && conference.assignmentDeadline > new Date();
+  }
+
   reviewToBeDone(conference: Conference): boolean {
     return conference.proposals.some(proposal => !proposal.reviews.every(review => review.username === this.authService.currentUser));
   }
@@ -89,15 +101,19 @@ export class MyConferencesComponent implements OnInit {
     return conference.proposals.some(proposal => !proposal.biddings.every(bidding => bidding.username === this.authService.currentUser));
   }
 
-  ifBiddingDone(conference: Conference): boolean {
-    return conference.proposalDeadline.getTime() <= new Date().getTime();
-  }
-
   getCurrentPCMember(conference: Conference): PCMember {
     return conference.pcMembers.find(pcm => pcm.user.username === this.user.username);
   }
 
   goToAssignReviewers(id): void {
     this.router.navigate([`assign-reviewers/${id}`]);
+  }
+
+  bid(conference: Conference): void {
+    this.router.navigate([`bid/${conference.id}`]);
+  }
+
+  review(conference: Conference): void {
+    this.router.navigate([`review/${conference.id}`]);
   }
 }

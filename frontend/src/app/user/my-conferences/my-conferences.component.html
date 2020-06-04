@@ -22,20 +22,20 @@
           <p>{{getCurrentDeadline(conference)}}</p>
           <div style="float: right">
             <ng-container *ngIf="getCurrentPCMember(conference).role !== Role.MEMBER">
-              <ng-container *ngIf="ifBiddingDone(conference)">
+              <ng-container *ngIf="checkAssigningPhase(conference)">
                 <button mat-raised-button (click)="goToAssignReviewers(conference.id)">Assign reviewers</button>
               </ng-container>
               <button (click)="openPostponeDialog(conference)" mat-raised-button style="margin-left: 10px">
                 Edit
               </button>
             </ng-container>
-            <ng-container *ngIf="biddingToBeDone(conference)">
-              <button color="warn" mat-raised-button style="margin-left: 10px">
+            <ng-container *ngIf="checkBidPhase(conference)">
+              <button (click)="bid(conference)" color="warn" mat-raised-button style="margin-left: 10px">
                 Bid
               </button>
             </ng-container>
-            <ng-container *ngIf="reviewToBeDone(conference)">
-              <button color="warn" mat-raised-button style="margin-left: 10px">
+            <ng-container *ngIf="checkEvaluatePhase(conference)">
+              <button (click)="review(conference)" color="warn" mat-raised-button style="margin-left: 10px">
                 Review
               </button>
             </ng-container>
