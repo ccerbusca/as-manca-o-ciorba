@@ -100,4 +100,8 @@ export class MyConferencesComponent implements OnInit {
   goToAssignReviewers(id): void {
     this.router.navigate([`assign-reviewers/${id}`]);
   }
+
+  bid(conference: Conference): void {
+    this.router.navigate([`bid/${conference.id}`]);
+  }
 }

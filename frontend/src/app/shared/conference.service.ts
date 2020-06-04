@@ -4,7 +4,6 @@ import {Conference} from './models/conference.model';
 import {map, tap} from 'rxjs/operators';
 import {ConfigService} from './config.service';
 import {HttpClient} from '@angular/common/http';
-import {Review} from './models/review.model';
 
 
 @Injectable({

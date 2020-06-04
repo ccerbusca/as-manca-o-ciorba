@@ -10,6 +10,7 @@ import {ConferenceDetailComponent} from './conference/conference-detail/conferen
 import {HomePageComponent} from './home-page/home-page.component';
 import {ReviewComponent} from './user/review/review.component';
 import {AssignReviewersComponent} from './user/my-conferences/assign-reviewers/assign-reviewers.component';
+import {BidComponent} from './user/bid/bid.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'conference/:id', component: ConferenceDetailComponent},
   {path: 'review/:id', component: ReviewComponent, canActivate: [AuthGuardService]},
   {path: 'assign-reviewers/:id', component: AssignReviewersComponent, canActivate: [AuthGuardService]},
+  {path: 'bid/:id', component: BidComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

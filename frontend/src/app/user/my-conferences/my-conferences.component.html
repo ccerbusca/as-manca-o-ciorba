@@ -29,8 +29,8 @@
                 Edit
               </button>
             </ng-container>
-            <ng-container *ngIf="biddingToBeDone(conference)">
-              <button color="warn" mat-raised-button style="margin-left: 10px">
+            <ng-container>
+              <button (click)="bid(conference)" color="warn" mat-raised-button style="margin-left: 10px">
                 Bid
               </button>
             </ng-container>
