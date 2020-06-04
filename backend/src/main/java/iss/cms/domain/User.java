@@ -45,4 +45,7 @@ public class User extends NamedEntity {
 
     @OneToMany(mappedBy = "author")
     private Set<Proposal> proposals = new HashSet<>();
+
+    @ManyToMany(mappedBy = "purchased")
+    private Set<Conference> boughtTickets = new HashSet<>();
 }

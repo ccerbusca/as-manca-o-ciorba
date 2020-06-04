@@ -2,21 +2,26 @@ package iss.cms.services;
 
 import iss.cms.domain.Conference;
 import iss.cms.repository.ConferenceRepository;
+import iss.cms.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConferenceService {
 
     private final ConferenceRepository conferenceRepository;
     private final PCMemberService pcMemberService;
+    private final UserRepository userRepository;
 
-    public ConferenceService(ConferenceRepository conferenceRepository, PCMemberService pcMemberService) {
+    public ConferenceService(ConferenceRepository conferenceRepository, PCMemberService pcMemberService,
+                             UserRepository userRepository) {
         this.conferenceRepository = conferenceRepository;
         this.pcMemberService = pcMemberService;
+        this.userRepository = userRepository;
     }
 
     public List<Conference> getConferences() {
@@ -37,6 +42,9 @@ public class ConferenceService {
                     c.setAssignmentDeadline(fromDto.getAssignmentDeadline());
                     c.setEvaluationDeadline(fromDto.getEvaluationDeadline());
                     c.setResultsDeadline(fromDto.getResultsDeadline());
+                    c.setPurchased(fromDto.getPurchased().stream()
+                            .map(u -> userRepository.findUserByUsername(u.getUsername()).orElseThrow())
+                            .collect(Collectors.toSet()));
                 }
         );
         return conference.orElse(null);

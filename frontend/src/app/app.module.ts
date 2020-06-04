@@ -8,7 +8,7 @@ import {AngularMaterialModule} from './angular-material.module';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserComponent} from './user/user.component';
-import {SignUpDialogComponent} from './sign-up/sign-up-dialog/sign-up-dialog.component';
+import {ConfirmationDialogComponent} from './sign-up/sign-up-dialog/confirmation-dialog.component';
 import {MySubmissionsComponent} from './user/my-submissions/my-submissions.component';
 import {ProposalService} from './shared/proposal.service';
 import {RecommendationDialogComponent} from './user/my-submissions/recommendation-dialog/recommendation-dialog.component';
@@ -38,7 +38,7 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     AppComponent,
     SignUpComponent,
     UserComponent,
-    SignUpDialogComponent,
+    ConfirmationDialogComponent,
     LogInComponent,
     MySubmissionsComponent,
     RecommendationDialogComponent,

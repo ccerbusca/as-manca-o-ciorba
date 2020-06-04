@@ -13,6 +13,7 @@ public interface UserMapper {
     @Mapping(target = "submissions", ignore = true)
     @Mapping(target = "sections", ignore = true)
     @Mapping(target = "proposals", ignore = true)
+    @Mapping(target = "boughtTickets", ignore = true)
     User fromDto(UserDTO userDTO);
 
     @Mapping(target = "password", ignore = true)

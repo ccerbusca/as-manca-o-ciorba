@@ -1,5 +1,6 @@
 import {PCMember} from './program-commitee-member.model';
 import {Proposal} from './proposal.model';
+import {User} from './user.model';
 
 export class Conference {
   id: number;
@@ -13,4 +14,6 @@ export class Conference {
   resultsDeadline: Date;
   pcMembers: PCMember[];
   proposals: Proposal[];
+  interested: User[];
+  purchased: User[];
 }

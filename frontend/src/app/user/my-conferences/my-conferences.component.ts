@@ -10,6 +10,9 @@ import {DatePipe} from '@angular/common';
 import {AddConferenceComponent} from '../../conference/add-conference/add-conference.component';
 import {UserService} from '../../shared/user.service';
 import {User} from '../../shared/models/user.model';
+import {forkJoin} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {ConfirmationDialogComponent} from '../../sign-up/sign-up-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-my-conferences',
@@ -32,8 +35,14 @@ export class MyConferencesComponent implements OnInit {
     this.update();
   }
 
+  isPCMember(conference: Conference): boolean {
+    return conference.pcMembers.some(pcMember => pcMember.user.id === this.user.id);
+  }
+
   private update(): void {
-    this.conferenceService.getConferencesForUser(this.authService.currentUser)
+    forkJoin ([this.conferenceService.getConferencesForUserInterested(this.authService.currentUser),
+           this.conferenceService.getConferencesForPcMember(this.authService.currentUser)])
+      .pipe(map(([a1, a2]) => [...a1, ...a2]))
       .subscribe(conferences => {
         console.log(conferences);
         this.conferences = conferences;
@@ -93,5 +102,22 @@ export class MyConferencesComponent implements OnInit {
 
   getCurrentPCMember(conference: Conference): PCMember {
     return conference.pcMembers.find(pcm => pcm.user.username === this.user.username);
+  }
+
+  canPurchase(conference: Conference): boolean {
+    return conference.resultsDeadline.getTime() <= new Date().getTime();
+  }
+
+  purchaseTicket(conference: Conference): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px', data: {header: 'Success!', content: 'Ticket acquired'}
+    }).afterClosed().subscribe(() => {
+      conference.purchased.push(this.user);
+      this.conferenceService.updateConference(conference).subscribe(_ => this.update());
+    });
+  }
+
+  alreadyPurchased(conference: Conference): boolean {
+    return conference.purchased.some(user => this.user.id === user.id);
   }
 }

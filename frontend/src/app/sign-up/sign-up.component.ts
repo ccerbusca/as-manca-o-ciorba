@@ -4,7 +4,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {Router} from '@angular/router';
 import {User} from '../shared/models/user.model';
 import {MatDialog} from '@angular/material/dialog';
-import {SignUpDialogComponent} from './sign-up-dialog/sign-up-dialog.component';
+import {ConfirmationDialogComponent} from './sign-up-dialog/confirmation-dialog.component';
 import {AuthService} from '../shared/auth/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -41,8 +41,9 @@ export class SignUpComponent implements OnInit {
 
   signUp(): void {
     this.authService.register(this.user).subscribe(user => {
-      this.dialog.open(SignUpDialogComponent, {
-        width: '400px'
+      this.dialog.open(ConfirmationDialogComponent, {
+        width: '400px', data: {header: 'Successfully signed up!',
+          content: 'You need to do one more step before logging in. Check your e-mail and verify your account'}
       }).afterClosed().subscribe(() => this.goToLogin());
     });
   }

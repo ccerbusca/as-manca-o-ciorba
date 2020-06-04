@@ -10,17 +10,26 @@
             {{conference.title}}
           </mat-panel-title>
           <mat-panel-description>
-            <div *ngIf="reviewToBeDone(conference)">
-              <strong> Reviews to be done! </strong>
-            </div>
-            <div *ngIf="biddingToBeDone(conference)">
-              <strong> Biddings pending! </strong>
+            <div *ngIf="isPCMember(conference)">
+              <div *ngIf="reviewToBeDone(conference)">
+                <strong> Reviews to be done! </strong>
+              </div>
+              <div *ngIf="biddingToBeDone(conference)">
+                <strong> Biddings pending! </strong>
+              </div>
             </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div>
           <p>{{getCurrentDeadline(conference)}}</p>
           <div style="float: right">
+            <ng-container *ngIf="canPurchase(conference)">
+              <button color="primary" (click)="purchaseTicket(conference)" [disabled]="alreadyPurchased(conference)" mat-raised-button style="margin-left: 10px">
+                Purchase Ticket
+              </button>
+            </ng-container>
+          </div>
+          <div style="float: right" *ngIf="isPCMember(conference)">
             <ng-container *ngIf="getCurrentPCMember(conference).role !== Role.MEMBER">
               <ng-container *ngIf="ifBiddingDone(conference)">
                 <button mat-raised-button>Assign reviewers</button>
