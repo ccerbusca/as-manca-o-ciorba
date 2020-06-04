@@ -1,7 +1,7 @@
 <h2 class="ml-3">{{conference.title}}</h2>
 <div class="ml-3">
     <ng-template #elseB>
-      <div *ngIf="isInterested()">
+      <div *ngIf="canBeInterested()">
         <button (click)="interested()" color="primary" mat-raised-button>Interested</button>
       </div>
     </ng-template>
@@ -38,6 +38,7 @@
         <div *ngIf="possibleToSubmit; then thenBlock else elseBlock"></div>
       </div>
     </div>
+    <mat-label>Currently Interested: {{conference.interested.length}}</mat-label>
   </mat-tab>
 </mat-tab-group>
 

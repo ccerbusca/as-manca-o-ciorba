@@ -52,7 +52,7 @@ export class ConferenceDetailComponent implements OnInit {
     this.conferenceService.getConference(id).subscribe(conference => this.conference = conference);
   }
 
-  isInterested(): boolean {
+  canBeInterested(): boolean {
     let result = false;
     this.conference.interested.forEach(user => {
       if (user.name === this.authService.currentUser) {

@@ -37,7 +37,7 @@ public class ConferenceService {
                     c.setAssignmentDeadline(fromDto.getAssignmentDeadline());
                     c.setEvaluationDeadline(fromDto.getEvaluationDeadline());
                     c.setResultsDeadline(fromDto.getResultsDeadline());
-            c.setUsers(fromDto.getUsers());
+            c.setInterestedUsers(fromDto.getInterestedUsers());
                 }
         );
         return conference.orElse(null);

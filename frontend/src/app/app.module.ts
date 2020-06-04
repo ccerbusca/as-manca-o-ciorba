@@ -29,6 +29,8 @@ import {DatePipe} from '@angular/common';
 import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
 import {AddConferenceComponent} from './conference/add-conference/add-conference.component';
 import {InterestedDialogComponent} from './conference/conference-detail/interested-dialog/interested-dialog.component';
+import {BidResultDialogComponent} from './user/bid/bid-result-dialog/bid-result-dialog.component';
+import {BidComponent} from './user/bid/bid.component';
 
 export function initConfig(config: ConfigService): () => Promise<void> {
   return () => config.loadConfiguration();
@@ -51,7 +53,9 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     ReviewResultDialogComponent,
     ReviewRecommendationDialogComponent,
     AddConferenceComponent,
-    InterestedDialogComponent
+    InterestedDialogComponent,
+    BidResultDialogComponent,
+    BidComponent
   ],
   imports: [
     BrowserModule,

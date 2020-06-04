@@ -51,7 +51,7 @@ public class Conference extends NamedEntity {
             joinColumns = {@JoinColumn(name = "conference_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-    private Set<User> users = new HashSet<>();
+    private Set<User> interestedUsers = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
