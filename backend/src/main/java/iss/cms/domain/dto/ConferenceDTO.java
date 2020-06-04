@@ -18,4 +18,5 @@ public class ConferenceDTO {
     private LocalDateTime resultsDeadline;
     private List<ProgramCommitteeMemberDTO> pcMembers;
     private List<ProposalDTO> proposals;
+    private List<UserDTO> interested;
 }

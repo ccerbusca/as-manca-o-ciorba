@@ -28,11 +28,11 @@ import {HomePageComponent} from './home-page/home-page.component';
 import {DatePipe} from '@angular/common';
 import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
 import {AddConferenceComponent} from './conference/add-conference/add-conference.component';
-import {AssignReviewersComponent} from './user/my-conferences/assign-reviewers/assign-reviewers.component';
-// tslint:disable-next-line:max-line-length
-import {AssignReviewersDialogComponent} from './user/my-conferences/assign-reviewers/assign-reviewers-dialog/assign-reviewers-dialog.component';
-import {BidComponent} from './user/bid/bid.component';
+import {InterestedDialogComponent} from './conference/conference-detail/interested-dialog/interested-dialog.component';
 import {BidResultDialogComponent} from './user/bid/bid-result-dialog/bid-result-dialog.component';
+import {BidComponent} from './user/bid/bid.component';
+import {AssignReviewersComponent} from './user/my-conferences/assign-reviewers/assign-reviewers.component';
+import {AssignReviewersDialogComponent} from './user/my-conferences/assign-reviewers/assign-reviewers-dialog/assign-reviewers-dialog.component';
 
 export function initConfig(config: ConfigService): () => Promise<void> {
   return () => config.loadConfiguration();
@@ -55,10 +55,11 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     ReviewResultDialogComponent,
     ReviewRecommendationDialogComponent,
     AddConferenceComponent,
-    AssignReviewersComponent,
-    AssignReviewersDialogComponent,
-    BidComponent,
+    InterestedDialogComponent,
     BidResultDialogComponent,
+    BidComponent,
+    AssignReviewersComponent,
+    AssignReviewersDialogComponent
   ],
   imports: [
     BrowserModule,

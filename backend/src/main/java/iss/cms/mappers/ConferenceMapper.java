@@ -13,6 +13,7 @@ public interface ConferenceMapper {
 
     @Mapping(target = "title", source = "name")
     @Mapping(target = "pcMembers", source = "programCommitteeMembers")
+    @Mapping(target = "interested", source = "interestedUsers")
     ConferenceDTO toDto(Conference conference);
 
     @InheritInverseConfiguration

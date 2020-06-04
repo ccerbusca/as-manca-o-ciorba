@@ -12,7 +12,6 @@ import {ReviewComponent} from './user/review/review.component';
 import {AssignReviewersComponent} from './user/my-conferences/assign-reviewers/assign-reviewers.component';
 import {BidComponent} from './user/bid/bid.component';
 
-
 const routes: Routes = [
   {path: '', component: HomePageComponent, pathMatch: 'full'},
   {path: 'register', component: SignUpComponent, canActivate: [AlreadyLoggedGuardService]},

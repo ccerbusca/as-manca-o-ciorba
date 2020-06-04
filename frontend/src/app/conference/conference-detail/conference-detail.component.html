@@ -1,11 +1,16 @@
 <h2 class="ml-3">{{conference.title}}</h2>
 <div class="ml-3">
-    <ng-template #elseB>
-      <button mat-raised-button color="primary"  (click)="interested()">Interested</button>
-    </ng-template>
-    <ng-template #thenB>
-      <p>This meeting already took place</p>
-    </ng-template>
+
+  <ng-template #elseB>
+    <div *ngIf="canBeInterested()">
+      <button (click)="interested()" color="primary" mat-raised-button>Interested</button>
+    </div>
+    <br>
+    <mat-label>Currently Interested: {{conference.interested.length}}</mat-label>
+  </ng-template>
+  <ng-template #thenB>
+    <p>This meeting already took place</p>
+  </ng-template>
   <div *ngIf="possibleToAttend; then thenB else elseB"></div>
 </div>
 
