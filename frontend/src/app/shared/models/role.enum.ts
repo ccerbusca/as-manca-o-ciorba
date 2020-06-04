@@ -1,3 +1,3 @@
 export enum Role {
-  CHAIR, CO_CHAIR, MEMBER
+  CHAIR = 'CHAIR', CO_CHAIR = 'CO_CHAIR', MEMBER = 'MEMBER'
 }

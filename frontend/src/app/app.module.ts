@@ -23,10 +23,11 @@ import {ReviewResultDialogComponent} from './user/review/review-result-dialog/re
 import {ReviewRecommendationDialogComponent} from './user/review/review-recommendation-dialog/review-recommendation-dialog.component';
 import {MyConferencesComponent} from './user/my-conferences/my-conferences.component';
 import {ConferenceService} from './shared/conference.service';
-import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
 import {ConferenceDetailComponent} from './conference/conference-detail/conference-detail.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {DatePipe} from '@angular/common';
+import {PostponeDialogComponent} from './user/my-conferences/postpone-dialog/postpone-dialog.component';
+import { AddConferenceComponent } from './conference/add-conference/add-conference.component';
 
 export function initConfig(config: ConfigService): () => Promise<void> {
   return () => config.loadConfiguration();
@@ -47,7 +48,8 @@ export function initConfig(config: ConfigService): () => Promise<void> {
     HomePageComponent,
     ReviewComponent,
     ReviewResultDialogComponent,
-    ReviewRecommendationDialogComponent
+    ReviewRecommendationDialogComponent,
+    AddConferenceComponent
   ],
   imports: [
     BrowserModule,

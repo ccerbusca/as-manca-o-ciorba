@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Conference Editor </h1>
+<div mat-dialog-content>
+  <form [formGroup]="conferenceForm">
+    <mat-form-field class="dblock">
+      <mat-label>Title</mat-label>
+      <input matInput="string" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>General Info</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                formControlName="generalInfo"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Start date</mat-label>
+      <input type="datetime-local" matInput formControlName="startTime" placeholder="Start date">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>End date</mat-label>
+      <input type="datetime-local" matInput formControlName="endTime">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Proposal Deadline</mat-label>
+      <input type="datetime-local" matInput formControlName="proposalDeadline">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Assignment Deadline</mat-label>
+      <input matInput type="datetime-local" formControlName="assignmentDeadline">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Evaluation Deadline</mat-label>
+      <input matInput type="datetime-local" formControlName="evaluationDeadline">
+    </mat-form-field>
+
+    <mat-form-field class="dblock">
+      <mat-label>Results Deadline</mat-label>
+      <input matInput type="datetime-local" formControlName="resultsDeadline">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <p *ngIf="conference.pcMembers.length > 0">Check to add as Co-Chair</p>
+    <mat-list>
+      <mat-list-item *ngFor="let pcm of conference.pcMembers">
+        <span>{{pcm.user.name}}</span><mat-checkbox class="ml-2" *ngIf="pcm.role !== Role.CHAIR"
+                                                    (click)="pcm.role = Role.CO_CHAIR"></mat-checkbox>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-form-field class="dblock">
+      <mat-label>Title</mat-label>
+      <input type="text" matInput [matAutocomplete]="auto">
+    </mat-form-field>
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getName">
+      <mat-option *ngFor="let u of users" [value]="u.username" (onSelectionChange)="userSelected($event)">{{u.name}}</mat-option>
+    </mat-autocomplete>
+
+  </form>
+  <button mat-raised-button color="primary" (click)="addConference()" [disabled]="conferenceForm.invalid || conference.pcMembers.length <= 1">Add</button>
+</div>

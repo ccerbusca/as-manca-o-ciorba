@@ -32,7 +32,9 @@ public class Section extends NamedEntity {
     @JoinColumn(name = "conference_id", nullable = false)
     private Conference conference;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "schair_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "schair_id", referencedColumnName = "id")
     private ProgramCommitteeMember sectionChair;
 }

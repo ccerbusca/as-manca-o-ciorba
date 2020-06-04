@@ -2,9 +2,10 @@ package iss.cms.mappers;
 
 import iss.cms.domain.User;
 import iss.cms.domain.dto.UserDTO;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -12,10 +13,10 @@ public interface UserMapper {
     @Mapping(target = "submissions", ignore = true)
     @Mapping(target = "sections", ignore = true)
     @Mapping(target = "proposals", ignore = true)
-    @Mapping(target = "id", ignore = true)
     User fromDto(UserDTO userDTO);
 
-    @InheritInverseConfiguration
     @Mapping(target = "password", ignore = true)
     UserDTO toDto(User user);
+
+    List<UserDTO> toDtoList(List<User> users);
 }

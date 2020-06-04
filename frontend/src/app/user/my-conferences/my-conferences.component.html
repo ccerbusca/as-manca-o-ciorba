@@ -2,45 +2,50 @@
   <br><br><br><br>
   <h1>My Conferences</h1>
   <br><br><br><br>
-  <mat-accordion *ngFor="let conference of conferences">
-    <mat-expansion-panel style="width: 50%">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{conference.title}}
-        </mat-panel-title>
-        <mat-panel-description>
-          <div *ngIf="reviewToBeDone(conference)">
-            <strong> Reviews to be done! </strong>
-          </div>
-          <div *ngIf="biddingToBeDone(conference)">
-            <strong> Biddings pending! </strong>
-          </div>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div>
-        <p>{{getCurrentDeadline(conference)}}</p>
-        <div style="float: right">
-          <ng-container *ngIf="user.role !== Role.MEMBER">
-            <ng-container *ngIf="ifBiddingDone(conference)">
-              <button mat-raised-button>Assign reviewers</button>
+  <div *ngIf="!!user">
+    <mat-accordion *ngFor="let conference of conferences">
+      <mat-expansion-panel style="width: 50%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{conference.title}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <div *ngIf="reviewToBeDone(conference)">
+              <strong> Reviews to be done! </strong>
+            </div>
+            <div *ngIf="biddingToBeDone(conference)">
+              <strong> Biddings pending! </strong>
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <p>{{getCurrentDeadline(conference)}}</p>
+          <div style="float: right">
+            <ng-container *ngIf="getCurrentPCMember(conference).role !== Role.MEMBER">
+              <ng-container *ngIf="ifBiddingDone(conference)">
+                <button mat-raised-button>Assign reviewers</button>
+              </ng-container>
+              <button (click)="openPostponeDialog(conference)" mat-raised-button style="margin-left: 10px">
+                Edit
+              </button>
             </ng-container>
-            <button (click)="openPostponeDialog(conference)" mat-raised-button style="margin-left: 10px">
-              Edit
-            </button>
-          </ng-container>
-          <ng-container *ngIf="biddingToBeDone(conference)">
-            <button color="warn" mat-raised-button style="margin-left: 10px">
-              Bid
-            </button>
-          </ng-container>
-          <ng-container *ngIf="reviewToBeDone(conference)">
-            <button color="warn" mat-raised-button style="margin-left: 10px">
-              Review
-            </button>
-          </ng-container>
+            <ng-container *ngIf="biddingToBeDone(conference)">
+              <button color="warn" mat-raised-button style="margin-left: 10px">
+                Bid
+              </button>
+            </ng-container>
+            <ng-container *ngIf="reviewToBeDone(conference)">
+              <button color="warn" mat-raised-button style="margin-left: 10px">
+                Review
+              </button>
+            </ng-container>
+          </div>
         </div>
-      </div>
-    </mat-expansion-panel>
-    <br>
-  </mat-accordion>
+      </mat-expansion-panel>
+      <br>
+    </mat-accordion>
+  </div>
+  <button (click)="openAddDialog()" mat-raised-button style="margin-left: 10px">
+    Add
+  </button>
 </div>

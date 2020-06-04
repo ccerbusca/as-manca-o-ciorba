@@ -21,29 +21,19 @@ public class ProgramCommitteeMember extends BaseEntity {
 
     private String personalWebpage;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "pcMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<>();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "pcMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Bidding> biddings = new HashSet<>();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "programCommitteeMembers")
     private Set<Conference> conferences = new HashSet<>();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "sectionChair")
     private Section section;
 }

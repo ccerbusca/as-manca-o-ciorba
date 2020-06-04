@@ -22,7 +22,7 @@ public class PCMemberService {
     @Transactional
     public ProgramCommitteeMember addPCMember(ProgramCommitteeMember programCommitteeMember)
     {
-        User user = userRepository.findUserByUsername(programCommitteeMember.getUser().getUsername()).orElseThrow();
+        User user = userRepository.findById(programCommitteeMember.getUser().getId()).orElseThrow();
         programCommitteeMember.setUser(user);
         return pcMemberRepository.save(programCommitteeMember);
     }
