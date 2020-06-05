@@ -7,6 +7,7 @@ import {AuthService} from '../../shared/auth/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {BidResultDialogComponent} from './bid-result-dialog/bid-result-dialog.component';
+import {BidResult} from '../../shared/models/bid-result.enum';
 
 @Component({
   selector: 'app-bid',
@@ -39,15 +40,15 @@ export class BidComponent implements OnInit {
   openBidDialog(proposal: Proposal): void {
     this.dialog.open(BidResultDialogComponent,
       {width: '1000px'})
-      .afterClosed().subscribe(result => {
-      if (!!result) {
-        this.proposalService.bid(proposal, result).subscribe(bidProposal => {
-          this.proposals.map(p => p.id === bidProposal.id ? bidProposal : p);
-          this.proposals = this.proposals.filter(p => p.id !== proposal.id);
-          this.dataSource = new MatTableDataSource(this.proposals);
-          this.dataSource.sort = this.sort;
-        });
-      }
+      .afterClosed().subscribe((result: BidResult) => {
+        if (!!result) {
+          this.proposalService.bid(proposal, result).subscribe(bidProposal => {
+            this.proposals.map(p => p.id === bidProposal.id ? bidProposal : p);
+            this.proposals = this.proposals.filter(p => p.id !== proposal.id);
+            this.dataSource = new MatTableDataSource(this.proposals);
+            this.dataSource.sort = this.sort;
+          });
+        }
     });
   }
 

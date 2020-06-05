@@ -9,4 +9,6 @@ public interface PCMemberRepository extends JpaRepository<ProgramCommitteeMember
 
     Optional<ProgramCommitteeMember> findProgramCommitteeMemberByUser_Username(String user_username);
 
+    Optional<ProgramCommitteeMember>findProgramCommitteeMemberByUser_UsernameAndConferences_Id(
+            String user_username, Long conferences_conference_id);
 }

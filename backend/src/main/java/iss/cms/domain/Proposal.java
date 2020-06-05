@@ -30,9 +30,13 @@ public class Proposal extends NamedEntity {
     @OneToOne(mappedBy = "proposal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Submission submission;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Bidding> biddings = new HashSet<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 

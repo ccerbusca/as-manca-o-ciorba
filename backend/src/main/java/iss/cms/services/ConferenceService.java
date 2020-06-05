@@ -47,7 +47,7 @@ public class ConferenceService {
                     c.setEvaluationDeadline(fromDto.getEvaluationDeadline());
                     c.setResultsDeadline(fromDto.getResultsDeadline());
                     fromDto.getInterestedUsers().forEach(user -> {
-                        User userToBeAdded = userService.getPCMemberByUsername(user.getUsername());
+                        User userToBeAdded = userService.getUserByUsername(user.getUsername());
                         c.getInterestedUsers().add(userToBeAdded);
                     });
                     fromDto.getProposals().forEach(proposal -> proposal.setConference(c));

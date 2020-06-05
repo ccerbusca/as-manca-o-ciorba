@@ -17,7 +17,6 @@ public interface ProposalMapper {
     @Mapping(target = "topics", ignore = true)
     @Mapping(target = "keywords", ignore = true)
     @Mapping(target = "author", ignore = true)
-    @Mapping(target = "id", ignore = true)
     Proposal fromDto(ProposalDTO proposalDTO);
 
     List<ProposalDTO> toDtoList(List<Proposal> proposals);
