@@ -59,4 +59,11 @@ public class ProposalController {
     {
         return proposalMapper.toDto(proposalService.addReview(confID, propID, reviewDTO.getUsername(), reviewMapper.fromDto(reviewDTO)));
     }
+
+    @RequestMapping(value = "/proposals/{propID}/recommend", method = RequestMethod.POST)
+    public ProposalDTO recommendReview(@PathVariable Long propID, @RequestBody ReviewDTO reviewDTO)
+    {
+        return proposalMapper.toDto(proposalService.recommend(propID, reviewDTO.getUsername(), reviewDTO.getRecommendation()));
+
+    }
 }

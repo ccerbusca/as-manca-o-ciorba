@@ -40,7 +40,8 @@ export class ProposalService {
   recommend(proposal: Proposal, recommendation: string): Observable<Proposal> {
     const review = proposal.reviews.find(rev => rev.username === this.authService.currentUser);
     review.recommendation = recommendation;
-    return of(proposal);
+    return this.http.post<Proposal>(
+      `${ConfigService.configuration.backendPath}/proposals/${proposal.id}/recommend`, review);
   }
 
   addReviewToProposal(proposal: Proposal, review: Review): Observable<Proposal> {

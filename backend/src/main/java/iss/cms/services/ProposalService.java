@@ -66,6 +66,7 @@ public class ProposalService {
         return proposal;
     }
 
+    @Transactional
     public Proposal addReview(Long confID, Long propID, String username, Review review)
     {
         ProgramCommitteeMember programCommitteeMember =
@@ -77,6 +78,14 @@ public class ProposalService {
         reviewRepository.save(review);
         proposal.getReviews().add(review);
         return proposal;
+    }
+
+    @Transactional
+    public Proposal recommend(Long propID, String username, String recommendation)
+    {
+        Review review = reviewRepository.findReviewByPcMember_User_UsernameAndProposal_Id(username, propID).orElseThrow();
+        review.setRecommendation(recommendation);
+        return review.getProposal();
     }
 
 }
