@@ -10,6 +10,9 @@
         <a mat-button [routerLink]="'/my-conferences'">My Conferences</a>
         <a mat-button [routerLink]="'/my-proposals'">My Proposals</a>
       </ng-container>
+      <ng-container style="float: right" *ngIf="authService.loggedIn()">
+        <a mat-button (click)="logout()">Logout</a>
+      </ng-container>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

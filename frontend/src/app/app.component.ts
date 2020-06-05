@@ -9,10 +9,15 @@ import {AuthService} from './shared/auth/auth.service';
 export class AppComponent {
   title = 'frontend';
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
   get isLoggedIn(): boolean {
     return this.authService.loggedIn();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    window.location.reload();
   }
 }
