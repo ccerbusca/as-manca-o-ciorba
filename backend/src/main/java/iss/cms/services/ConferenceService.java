@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ConferenceService {
@@ -50,9 +49,6 @@ public class ConferenceService {
                         User userToBeAdded = userService.getUserByUsername(user.getUsername());
                         c.getInterestedUsers().add(userToBeAdded);
                     });
-                    fromDto.getProposals().forEach(proposal -> proposal.setConference(c));
-                    c.getProposals().addAll(fromDto.getProposals().stream()
-                            .map(proposalService::addProposal).collect(Collectors.toSet()));
                 }
         );
         return conference.orElse(null);

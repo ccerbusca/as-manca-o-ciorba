@@ -14,9 +14,6 @@ public interface ProposalMapper {
     ProposalDTO toDto(Proposal proposal);
 
     @Mapping(target = "conference", ignore = true)
-    @Mapping(target = "topics", ignore = true)
-    @Mapping(target = "keywords", ignore = true)
-    @Mapping(target = "author", ignore = true)
     Proposal fromDto(ProposalDTO proposalDTO);
 
     List<ProposalDTO> toDtoList(List<Proposal> proposals);

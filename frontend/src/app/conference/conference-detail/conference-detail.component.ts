@@ -9,6 +9,7 @@ import {Proposal} from '../../shared/models/proposal.model';
 import {MatDialog} from '@angular/material/dialog';
 import {InterestedDialogComponent} from './interested-dialog/interested-dialog.component';
 import {UserService} from '../../shared/user.service';
+import {ProposalService} from '../../shared/proposal.service';
 
 @Component({
   selector: 'app-conference-detail',
@@ -20,6 +21,7 @@ export class ConferenceDetailComponent implements OnInit {
   conference: Conference;
   user: User;
   constructor(private conferenceService: ConferenceService,
+              private proposalService: ProposalService,
               private dialog: MatDialog,
               private route: ActivatedRoute,
               private authService: AuthService,
@@ -33,9 +35,10 @@ export class ConferenceDetailComponent implements OnInit {
     this.dialog.open(AddProposalComponent, {width: '400px'}).afterClosed().subscribe((result: Proposal) => {
       if (!!result) {
         result.author = this.user;
+        result.conferenceID = this.conference.id;
         this.conference.proposals.push(result);
-        this.conferenceService.updateConference(this.conference)
-          .subscribe(conference => this.conference = conference);
+        this.proposalService.addProposal(result, this.conference.id)
+          .subscribe(proposal => this.conference.proposals.push(proposal));
       }
     });
   }

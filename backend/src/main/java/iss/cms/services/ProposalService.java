@@ -1,13 +1,7 @@
 package iss.cms.services;
 
-import iss.cms.domain.Bidding;
-import iss.cms.domain.ProgramCommitteeMember;
-import iss.cms.domain.Proposal;
-import iss.cms.domain.Review;
-import iss.cms.repository.BiddingRepository;
-import iss.cms.repository.PCMemberRepository;
-import iss.cms.repository.ProposalRepository;
-import iss.cms.repository.ReviewRepository;
+import iss.cms.domain.*;
+import iss.cms.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,21 +13,26 @@ public class ProposalService {
     private final PCMemberRepository pcMemberRepository;
     private final BiddingRepository biddingRepository;
     private final ReviewRepository reviewRepository;
+    private final ConferenceRepository conferenceRepository;
 
     public ProposalService(ProposalRepository proposalRepository,
                            PCMemberRepository pcMemberRepository,
                            BiddingRepository biddingRepository,
-                           ReviewRepository reviewRepository)
+                           ReviewRepository reviewRepository,
+                           ConferenceRepository conferenceRepository)
     {
         this.proposalRepository = proposalRepository;
         this.pcMemberRepository = pcMemberRepository;
         this.biddingRepository = biddingRepository;
         this.reviewRepository = reviewRepository;
+        this.conferenceRepository = conferenceRepository;
     }
 
     @Transactional
-    public Proposal addProposal(Proposal proposal)
+    public Proposal addProposal(Long confID, Proposal proposal)
     {
+        Conference conference = conferenceRepository.findById(confID).orElseThrow();
+        proposal.setConference(conference);
         return proposalRepository.save(proposal);
     }
 

@@ -44,6 +44,11 @@ export class ProposalService {
       `${ConfigService.configuration.backendPath}/api/proposals/${proposal.id}/recommend`, review);
   }
 
+  addProposal(proposal: Proposal, confID: number): Observable<Proposal> {
+    return this.http.post<Proposal>(
+      `${ConfigService.configuration.backendPath}/api/conf/${confID}/proposals`, proposal);
+  }
+
   addReviewToProposal(proposal: Proposal, review: Review): Observable<Proposal> {
     proposal.reviews.push(review);
     return this.http.post<Proposal>(
