@@ -94,11 +94,14 @@ export class MyConferencesComponent implements OnInit {
   }
 
   reviewToBeDone(conference: Conference): boolean {
-    return conference.proposals.some(proposal => !proposal.reviews.every(review => review.username === this.authService.currentUser));
+    return this.checkEvaluatePhase(conference) &&
+      conference.proposals.some(proposal => !proposal.reviews.some(review => review.username === this.authService.currentUser));
   }
 
   biddingToBeDone(conference: Conference): boolean {
-    return conference.proposals.some(proposal => !proposal.biddings.every(bidding => bidding.username === this.authService.currentUser));
+    return this.checkBidPhase(conference) &&
+      conference.proposals.some(proposal => !proposal.biddings.some(bidding => bidding.username === this.authService.currentUser)) &&
+      conference.pcMembers.find(pcm => pcm.user.username === this.authService.currentUser).role !== Role.CHAIR;
   }
 
   getCurrentPCMember(conference: Conference): PCMember {

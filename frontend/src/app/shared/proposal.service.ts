@@ -19,14 +19,14 @@ export class ProposalService {
   }
 
   getProposalsByConferenceId(id: number): Observable<Proposal[]> {
-    return this.http.get<Proposal[]>(`${ConfigService.configuration.backendPath}/proposals/conf/${id}`);
+    return this.http.get<Proposal[]>(`${ConfigService.configuration.backendPath}/api/proposals/conf/${id}`);
   }
 
   getProposalByUsername(username: string): Observable<Proposal[]> {
     return this.http.get<Proposal[]>(`${ConfigService.configuration.backendPath}/api/proposals/${username}`);
   }
   getAcceptedProposalsWithoutReviewers(conferenceId: number): Observable<Proposal[]> {
-    return this.http.get<Proposal[]>(`${ConfigService.configuration.backendPath}/proposals/conf/${conferenceId}/assign`);
+    return this.http.get<Proposal[]>(`${ConfigService.configuration.backendPath}/api/proposals/conf/${conferenceId}/assign`);
   }
 
   review(proposal: Proposal, result: ReviewResult): Observable<Proposal> {
@@ -34,20 +34,20 @@ export class ProposalService {
     review.result = result;
     review.username = localStorage.getItem('username');
     return this.http.post<Proposal>(
-      `${ConfigService.configuration.backendPath}/conf/${proposal.conferenceID}/proposals/${proposal.id}/review`, review);
+      `${ConfigService.configuration.backendPath}/api/conf/${proposal.conferenceID}/proposals/${proposal.id}/review`, review);
   }
 
   recommend(proposal: Proposal, recommendation: string): Observable<Proposal> {
     const review = proposal.reviews.find(rev => rev.username === this.authService.currentUser);
     review.recommendation = recommendation;
     return this.http.post<Proposal>(
-      `${ConfigService.configuration.backendPath}/proposals/${proposal.id}/recommend`, review);
+      `${ConfigService.configuration.backendPath}/api/proposals/${proposal.id}/recommend`, review);
   }
 
   addReviewToProposal(proposal: Proposal, review: Review): Observable<Proposal> {
     proposal.reviews.push(review);
     return this.http.post<Proposal>(
-      `${ConfigService.configuration.backendPath}/conf/${proposal.conferenceID}/proposals/${proposal.id}/addreviewer`, review);
+      `${ConfigService.configuration.backendPath}/api/conf/${proposal.conferenceID}/proposals/${proposal.id}/addreviewer`, review);
   }
 
   bid(proposal: Proposal, result: BidResult): Observable<Proposal> {
@@ -55,6 +55,6 @@ export class ProposalService {
     bid.result = result;
     bid.username = this.authService.currentUser;
     return this.http.post<Proposal>(
-      `${ConfigService.configuration.backendPath}/conf/${proposal.conferenceID}/proposals/${proposal.id}/bid`, bid);
+      `${ConfigService.configuration.backendPath}/api/conf/${proposal.conferenceID}/proposals/${proposal.id}/bid`, bid);
   }
 }
