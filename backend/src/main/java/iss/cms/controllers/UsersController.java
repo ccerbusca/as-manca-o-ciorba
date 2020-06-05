@@ -1,13 +1,11 @@
 package iss.cms.controllers;
 
+import iss.cms.domain.dto.ProgramCommitteeMemberDTO;
 import iss.cms.domain.dto.UserDTO;
 import iss.cms.mappers.PCMemberMapper;
 import iss.cms.mappers.UserMapper;
 import iss.cms.services.UserService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,7 +33,13 @@ public class UsersController {
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public UserDTO getUser(@RequestBody String username)
     {
-        return userMapper.toDto(userService.getPCMemberByUsername(username));
+        return userMapper.toDto(userService.getUserByUsername(username));
+    }
+
+    @RequestMapping(value = "/conf/{id}/pcmember/{username}")
+    ProgramCommitteeMemberDTO getPCMemberForConferenceByUsername(@PathVariable Long id, @PathVariable String username)
+    {
+        return pcMemberMapper.toDto(userService.getPCMemberByUsernameForConf(id, username));
     }
 
 }

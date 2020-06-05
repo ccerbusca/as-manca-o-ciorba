@@ -26,11 +26,11 @@
   </mat-tab>
   <mat-tab label="Application Details">
     <div class="ml-3">
-      <p>Conference will begin on <b>{{conference.startTime | date: 'short'}}</b> and end on <b>{{conference.endTime | date: 'shortDate'}}</b></p>
-      <p>The deadline for sending proposals is: <b>{{conference.proposalDeadline | date: 'shortDate'}}</b></p>
-      <p>The deadline for assigning reviewers is: <b>{{conference.assignmentDeadline | date: 'shortDate'}}</b></p>
-      <p>The deadline for proposals evaluation is: <b>{{conference.evaluationDeadline | date: 'shortDate'}}</b></p>
-      <p>The deadline for results of the evaluation is: <b>{{conference.resultsDeadline | date: 'shortDate'}}</b></p>
+      <p>Conference will begin on <b>{{conference.startTime | date: 'short'}}</b> and end on <b>{{conference.endTime | date: 'short'}}</b></p>
+      <p>The deadline for sending proposals is: <b>{{conference.proposalDeadline | date: 'short'}}</b></p>
+      <p>The deadline for assigning reviewers is: <b>{{conference.assignmentDeadline | date: 'short'}}</b></p>
+      <p>The deadline for proposals evaluation is: <b>{{conference.evaluationDeadline | date: 'short'}}</b></p>
+      <p>The deadline for results of the evaluation is: <b>{{conference.resultsDeadline | date: 'short'}}</b></p>
       <div>
         <ng-template #thenBlock>
           <p style="color: red">The deadline for paper submission has passed!</p>

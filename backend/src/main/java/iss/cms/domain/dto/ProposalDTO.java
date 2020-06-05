@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class ProposalDTO {
+    private Long id;
     private String name;
     private LocalDateTime uploadTime;
     private List<ReviewDTO> reviews;

@@ -6,15 +6,15 @@ import {MatDialog} from '@angular/material/dialog';
 import {RecommendationDialogComponent} from './recommendation-dialog/recommendation-dialog.component';
 import {Proposal} from '../../shared/models/proposal.model';
 import {Status} from '../../shared/models/status.enum';
-import {map} from 'rxjs/operators';
+import {AuthService} from '../../shared/auth/auth.service';
 
 @Component({
-  selector: 'app-my-submissions',
-  templateUrl: './my-submissions.component.html',
-  styleUrls: ['./my-submissions.component.scss'],
+  selector: 'app-my-proposals',
+  templateUrl: './my-proposals.component.html',
+  styleUrls: ['./my-proposals.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MySubmissionsComponent implements OnInit {
+export class MyProposalsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   proposals: Proposal[];
   dataSource: MatTableDataSource<Proposal>;
@@ -23,11 +23,12 @@ export class MySubmissionsComponent implements OnInit {
   Status = Status;
 
   constructor(private proposalService: ProposalService,
+              private authService: AuthService,
               private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.proposalService.getProposals()
+    this.proposalService.getProposalByUsername(this.authService.currentUser)
       .subscribe(proposals => {
         this.proposals = proposals;
         this.dataSource = new MatTableDataSource(this.proposals);

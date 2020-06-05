@@ -46,6 +46,8 @@ public class User extends NamedEntity {
     @ManyToMany(mappedBy = "interestedUsers")
     private Set<Conference> conferences = new HashSet<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "author")
     private Set<Proposal> proposals = new HashSet<>();
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {Router} from '@angular/router';
 import {User} from '../shared/models/user.model';
@@ -54,7 +54,7 @@ export class SignUpComponent implements OnInit {
 
   private initForm(): void {
     this.signUpForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', Validators.compose([Validators.required, this.customUsernameValidator])],
       username: ['', Validators.required],
       affiliation: ['', Validators.required],
       password: ['', Validators.required],
@@ -67,5 +67,14 @@ export class SignUpComponent implements OnInit {
       this.user.password = values.password;
       this.user.affiliation = values.affiliation;
     });
+  }
+
+  private customUsernameValidator: ValidatorFn = (control: FormControl) => {
+    if (control.value.includes(' ')) {
+      return {
+        whitespaceError: { value: 'Username should not contain spaces' }
+      };
+    }
+    return null;
   }
 }

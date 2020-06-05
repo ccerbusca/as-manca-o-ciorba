@@ -5,6 +5,8 @@ import iss.cms.domain.dto.ProposalDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(uses = {ReviewMapper.class, BiddingMapper.class, SubmissionMapper.class, UserMapper.class})
 public interface ProposalMapper {
 
@@ -15,7 +17,9 @@ public interface ProposalMapper {
     @Mapping(target = "topics", ignore = true)
     @Mapping(target = "keywords", ignore = true)
     @Mapping(target = "author", ignore = true)
-    @Mapping(target = "id", ignore = true)
     Proposal fromDto(ProposalDTO proposalDTO);
 
+    List<ProposalDTO> toDtoList(List<Proposal> proposals);
+
+    List<Proposal> fromDtoList(List<ProposalDTO> proposalDTOS);
 }

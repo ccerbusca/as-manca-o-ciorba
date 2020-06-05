@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../shared/auth/auth.service';
 import {ConferenceService} from '../shared/conference.service';
 import {Conference} from '../shared/models/conference.model';
 import {Router} from '@angular/router';
@@ -15,8 +14,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   conferences: Conference[];
   subscription: Subscription;
 
-  constructor(private authService: AuthService,
-              private conferenceService: ConferenceService,
+  constructor(private conferenceService: ConferenceService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -26,10 +24,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  get isLoggedIn(): boolean {
-    return this.authService.loggedIn();
   }
 
   conferenceDetails(id: number): void {

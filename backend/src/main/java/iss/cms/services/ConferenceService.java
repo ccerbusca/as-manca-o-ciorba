@@ -8,18 +8,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConferenceService {
 
     private final ConferenceRepository conferenceRepository;
     private final PCMemberService pcMemberService;
+    private final ProposalService proposalService;
     private final UserService userService;
 
-    public ConferenceService(ConferenceRepository conferenceRepository, PCMemberService pcMemberService, UserService userService) {
+    public ConferenceService(ConferenceRepository conferenceRepository,
+                             PCMemberService pcMemberService,
+                             UserService userService,
+                             ProposalService proposalService) {
         this.conferenceRepository = conferenceRepository;
         this.pcMemberService = pcMemberService;
         this.userService = userService;
+        this.proposalService = proposalService;
     }
 
     public List<Conference> getConferences() {
@@ -41,10 +47,12 @@ public class ConferenceService {
                     c.setEvaluationDeadline(fromDto.getEvaluationDeadline());
                     c.setResultsDeadline(fromDto.getResultsDeadline());
                     fromDto.getInterestedUsers().forEach(user -> {
-                        User userToBeAdded = userService.getPCMemberByUsername(user.getUsername());
+                        User userToBeAdded = userService.getUserByUsername(user.getUsername());
                         c.getInterestedUsers().add(userToBeAdded);
                     });
-
+                    fromDto.getProposals().forEach(proposal -> proposal.setConference(c));
+                    c.getProposals().addAll(fromDto.getProposals().stream()
+                            .map(proposalService::addProposal).collect(Collectors.toSet()));
                 }
         );
         return conference.orElse(null);

@@ -1,10 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Conference} from '../../shared/models/conference.model';
 import {ConferenceService} from '../../shared/conference.service';
 import {ActivatedRoute} from '@angular/router';
+import {AddProposalComponent} from './add-proposal/add-proposal.component';
+import {User} from '../../shared/models/user.model';
+import {AuthService} from '../../shared/auth/auth.service';
+import {Proposal} from '../../shared/models/proposal.model';
 import {MatDialog} from '@angular/material/dialog';
 import {InterestedDialogComponent} from './interested-dialog/interested-dialog.component';
-import {AuthService} from '../../shared/auth/auth.service';
 import {UserService} from '../../shared/user.service';
 
 @Component({
@@ -14,21 +17,27 @@ import {UserService} from '../../shared/user.service';
 })
 export class ConferenceDetailComponent implements OnInit {
 
-  @Input() conference: Conference;
-
+  conference: Conference;
+  user: User;
   constructor(private conferenceService: ConferenceService,
-              private authService: AuthService,
-              private userService: UserService,
+              private dialog: MatDialog,
               private route: ActivatedRoute,
-              private dialog: MatDialog) {
-  }
+              private authService: AuthService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.getConference();
   }
 
   apply(): void {
-    return;
+    this.dialog.open(AddProposalComponent, {width: '400px'}).afterClosed().subscribe((result: Proposal) => {
+      if (!!result) {
+        result.author = this.user;
+        this.conference.proposals.push(result);
+        this.conferenceService.updateConference(this.conference)
+          .subscribe(conference => this.conference = conference);
+      }
+    });
   }
 
   get possibleToSubmit(): boolean {
@@ -52,6 +61,9 @@ export class ConferenceDetailComponent implements OnInit {
   private getConference(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.conferenceService.getConference(id).subscribe(conference => this.conference = conference);
+    this.userService.getPCMemberByUsername(this.authService.currentUser).subscribe(
+      user => this.user = user,
+      _ => console.log('not found'));
   }
 
   canBeInterested(): boolean {
