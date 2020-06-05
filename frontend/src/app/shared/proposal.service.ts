@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Proposal} from './models/proposal.model';
 import {ReviewResult} from './models/review-result.enum';
 import {Review} from './models/review.model';
@@ -33,8 +33,8 @@ export class ProposalService {
     const review = new Review();
     review.result = result;
     review.username = localStorage.getItem('username');
-    proposal.reviews.push(review);
-    return of(proposal);
+    return this.http.post<Proposal>(
+      `${ConfigService.configuration.backendPath}/conf/${proposal.conferenceID}/proposals/${proposal.id}/review`, review);
   }
 
   recommend(proposal: Proposal, recommendation: string): Observable<Proposal> {
@@ -47,7 +47,7 @@ export class ProposalService {
   addReviewToProposal(proposal: Proposal, review: Review): Observable<Proposal> {
     proposal.reviews.push(review);
     return this.http.post<Proposal>(
-      `${ConfigService.configuration.backendPath}/conf/${proposal.conferenceID}/proposals/${proposal.id}/review`, review);
+      `${ConfigService.configuration.backendPath}/conf/${proposal.conferenceID}/proposals/${proposal.id}/addreviewer`, review);
   }
 
   bid(proposal: Proposal, result: BidResult): Observable<Proposal> {

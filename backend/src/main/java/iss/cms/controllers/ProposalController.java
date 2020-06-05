@@ -54,10 +54,16 @@ public class ProposalController {
         return proposalMapper.toDto(proposalService.bidProposal(confID, propID, biddingDTO.getUsername(), biddingMapper.fromDto(biddingDTO)));
     }
 
-    @RequestMapping(value = "/conf/{confID}/proposals/{propID}/review", method = RequestMethod.POST)
-    public ProposalDTO reviewProposal(@PathVariable Long confID, @PathVariable Long propID, @RequestBody ReviewDTO reviewDTO)
+    @RequestMapping(value = "/proposals/{propID}/review", method = RequestMethod.POST)
+    public ProposalDTO reviewProposal(@PathVariable Long propID, @RequestBody ReviewDTO reviewDTO)
     {
-        return proposalMapper.toDto(proposalService.addReview(confID, propID, reviewDTO.getUsername(), reviewMapper.fromDto(reviewDTO)));
+        return proposalMapper.toDto(proposalService.updateReview(propID, reviewDTO.getUsername(), reviewMapper.fromDto(reviewDTO)));
+    }
+
+    @RequestMapping(value = "/conf/{confID}/proposals/{propID}/addreviewer", method = RequestMethod.POST)
+    public ProposalDTO addReviewer(@PathVariable Long confID, @PathVariable Long propID, @RequestBody ReviewDTO reviewDTO)
+    {
+        return proposalMapper.toDto(proposalService.addReview(confID, propID, reviewDTO.getUsername()));
     }
 
     @RequestMapping(value = "/proposals/{propID}/recommend", method = RequestMethod.POST)

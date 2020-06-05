@@ -67,17 +67,26 @@ public class ProposalService {
     }
 
     @Transactional
-    public Proposal addReview(Long confID, Long propID, String username, Review review)
+    public Proposal addReview(Long confID, Long propID, String username)
     {
         ProgramCommitteeMember programCommitteeMember =
                 pcMemberRepository.findProgramCommitteeMemberByUser_UsernameAndConferences_Id(username, confID)
                         .orElseThrow();
+        Review review = new Review();
         review.setPcMember(programCommitteeMember);
         Proposal proposal = proposalRepository.findById(propID).orElseThrow();
         review.setProposal(proposal);
         reviewRepository.save(review);
         proposal.getReviews().add(review);
         return proposal;
+    }
+
+    @Transactional
+    public Proposal updateReview(Long propID, String username, Review review)
+    {
+        Review r = reviewRepository.findReviewByPcMember_User_UsernameAndProposal_Id(username, propID).orElseThrow();
+        r.setResult(review.getResult());
+        return r.getProposal();
     }
 
     @Transactional
