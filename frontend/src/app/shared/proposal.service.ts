@@ -62,4 +62,64 @@ export class ProposalService {
     return this.http.post<Proposal>(
       `${ConfigService.configuration.backendPath}/api/conf/${proposal.conferenceID}/proposals/${proposal.id}/bid`, bid);
   }
+
+  getProposalsWithContradictoryReviews(conferenceId: number): Observable<Proposal[]> {
+    const proposals: Proposal[] = [];
+    proposals.push({
+      id: 808,
+      status: Status.ACCEPTED,
+      biddings: [
+        {
+          result: BidResult.NEUTRAL,
+          username: 'mihai'
+        },
+        {
+          result: BidResult.PLEASED,
+          username: 'andrei'
+        }
+      ],
+      submission: {
+        fullPaperUrl: 'full paper URL',
+        abstractPaperUrl: 'abstract paper URL',
+      },
+      reviews: [{
+        username: 'mihai',
+        result: ReviewResult.ACCEPT
+      },
+        {
+          username: 'andrei',
+          result: ReviewResult.REJECT
+        }],
+      name: 'muie1',
+      uploadTime: new Date()
+    });
+    proposals.push({
+      id: 188,
+      status: Status.ACCEPTED,
+      submission: {
+        fullPaperUrl: 'full paper URL',
+        abstractPaperUrl: 'abstract paper URL',
+      },
+      reviews: [{
+        username: 'mihai',
+        result: ReviewResult.ACCEPT
+      },
+        {
+          username: 'andrei',
+          result: ReviewResult.REJECT
+        }],
+      name: 'muie2',
+      uploadTime: new Date()
+    });
+    return of(proposals);
+  }
+
+  reviewChair(proposal: Proposal, result: any): Observable<Proposal> {
+    // maybe here delete all reviews so there won't be any conflicting ones, and then add chair's review to be the only one
+    const review = new Review();
+    review.result = result;
+    review.username = this.authService.currentUser;
+    proposal.reviews.push(review);
+    return of(proposal);
+  }
 }
